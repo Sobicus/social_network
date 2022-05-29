@@ -6,8 +6,7 @@ export const Profile = () => {
     return (
         <div className={s.content}>
             <div>
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQirRAu3DZ4oS_fxG1IKKFHhKcjqp6iVGnqFg&usqp=CAU"/>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQirRAu3DZ4oS_fxG1IKKFHhKcjqp6iVGnqFg&usqp=CAU" alt='img'/>
             </div>
             <div>
                 ava + description
