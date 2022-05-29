@@ -1,0 +1,8 @@
+.header {
+    grid-area: h;
+    /*background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsEbX-Injao1ek6yRCOPHZ0af3AygM1UgtGQ&usqp=CAU');*/
+    background-color: darkslategrey;
+}
+.header img {
+    width: 60px;
+}
