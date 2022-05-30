@@ -7,7 +7,7 @@ type PostTypeProps = {
 }
 export const Post = (props: PostTypeProps) => {
     return (
-        <div className={s.item}>
+        <div className={s.dialog}>
             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8Ij8X12ctUomIqVrqBpASkfy3QtI-ZiJFw&usqp=CAU' alt='avatar'/>
             {props.postText}
             <div>
