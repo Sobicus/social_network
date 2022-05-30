@@ -1,19 +1,32 @@
 import React from "react";
 import s from './MyPosts.module.css'
-import {Post} from "./Post/Post";
+import {Post, postsDataType} from "./Post/Post";
+
+
+let postsData: Array<postsDataType> = [
+    {id:1, message:'Hello my friend', likeCount:5},
+    {id:2, message:'It my first types', likeCount:5},
+    {id:3, message:'Go go go fly', likeCount:5},
+]
 
 export const MyPosts = () => {
     return (
-        <div>
-            My posts
+        <div className={s.postBlock}>
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
             </div>
-            <div>
-               <Post postText='Hello my friend' likeCount={5}/>
-               <Post postText='It my first types' likeCount={11}/>
-               <Post postText='Go go go fly' likeCount={13}/>
+            <div className={s.posts}>
+                {postsData.map((el)=>{
+                    return(
+                        <Post id={el.id} message={el.message} likeCount={el.likeCount}/>
+                    )
+                })}
             </div>
         </div>
     )

@@ -22,10 +22,8 @@ const App = () => {
                         <Route path="dialogs/*" element={<Dialogs/>}/>
                         <Route path="news/*" element={<News/>}/>
                         <Route path="music/*" element={<Music/>}/>
-                        <Route path="settings/*" element={<Settings/>}/>
+                        <Route path="settings/*" element={<Settings text={"test new rout dom function"}/>}/>
                     </Routes>
-                    {/*<Profile/>*/}
-                    {/*<Dialogs/>*/}
                 </div>
             </div>
         </BrowserRouter>
