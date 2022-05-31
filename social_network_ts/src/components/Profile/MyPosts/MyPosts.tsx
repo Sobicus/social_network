@@ -3,13 +3,15 @@ import s from './MyPosts.module.css'
 import {Post, postsDataType} from "./Post/Post";
 
 
-let postsData: Array<postsDataType> = [
-    {id:1, message:'Hello my friend', likeCount:5},
-    {id:2, message:'It my first types', likeCount:5},
-    {id:3, message:'Go go go fly', likeCount:5},
-]
-
-export const MyPosts = () => {
+// let postsData: Array<postsDataType> = [
+//     {id:1, message:'Hello my friend', likeCount:5},
+//     {id:2, message:'It my first types', likeCount:5},
+//     {id:3, message:'Go go go fly', likeCount:5},
+// ]
+type MyPostsPropsType={
+    postsData:Array<postsDataType>
+}
+export const MyPosts:React.FC<MyPostsPropsType>= (props) => {
     return (
         <div className={s.postBlock}>
             <h3>My posts</h3>
@@ -22,7 +24,7 @@ export const MyPosts = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                {postsData.map((el)=>{
+                {props.postsData.map((el)=>{
                     return(
                         <Post id={el.id} message={el.message} likeCount={el.likeCount}/>
                     )
