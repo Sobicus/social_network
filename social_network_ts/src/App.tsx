@@ -8,17 +8,17 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
-import {postsDataType} from "./components/Profile/MyPosts/Post/Post";
-import {DialogItemsPropsType} from "./components/Dialogs/DialogItem/DialogItem";
-import {MessageItemPropsType} from "./components/Dialogs/Message/Message";
+import {stateType} from "./redux/state";
 
 type AppPropsType={
-    postsData:Array<postsDataType>
-    dialogsData:Array<DialogItemsPropsType>
-    messagesData:Array<MessageItemPropsType>
+    state:stateType
+    // postsData:Array<postsDataType>
+    // dialogsData:Array<DialogItemsPropsType>
+    // messagesData:Array<MessageItemPropsType>
 }
 
 const App:React.FC<AppPropsType>= (props) => {
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -26,8 +26,8 @@ const App:React.FC<AppPropsType>= (props) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path="profile/*" element={<Profile postsData={props.postsData}/>}/>
-                        <Route path="dialogs/*" element={<Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>}/>
+                        <Route path="profile/*" element={<Profile postsData={props.state.profilePage.postsData}/>}/>
+                        <Route path="dialogs/*" element={<Dialogs dialogsData={props.state.messagesPage.dialogsData} messagesData={props.state.messagesPage.messagesData}/>}/>
                         <Route path="news/*" element={<News/>}/>
                         <Route path="music/*" element={<Music/>}/>
                         <Route path="settings/*" element={<Settings text={"test new rout dom function"}/>}/>

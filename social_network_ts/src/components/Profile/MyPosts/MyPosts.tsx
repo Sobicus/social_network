@@ -1,13 +1,8 @@
 import React from "react";
 import s from './MyPosts.module.css'
-import {Post, postsDataType} from "./Post/Post";
+import {Post} from "./Post/Post";
+import {postsDataType, profilePageType, stateType} from "../../../redux/state";
 
-
-// let postsData: Array<postsDataType> = [
-//     {id:1, message:'Hello my friend', likeCount:5},
-//     {id:2, message:'It my first types', likeCount:5},
-//     {id:3, message:'Go go go fly', likeCount:5},
-// ]
 type MyPostsPropsType={
     postsData:Array<postsDataType>
 }

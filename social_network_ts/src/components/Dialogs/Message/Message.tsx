@@ -1,7 +1,7 @@
 import s from './../Dialogs.module.css'
 
 
-export type MessageItemPropsType = {
+ type MessageItemPropsType = {
     id: number
     message: string
 }
