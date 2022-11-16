@@ -1,9 +1,10 @@
 import React from "react";
+import './Navbar.css'
 
 export const Navbar = () => {
     return (
         <nav className='nav'>
-            <div>
+            <div className='item'>
                 <a href="#">Profile</a>
             </div>
             <div>

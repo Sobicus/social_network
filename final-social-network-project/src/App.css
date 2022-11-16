@@ -12,23 +12,3 @@
     grid-template-areas:'heder heder'
     'nav content';
 }
-
-.heder {
-    grid-area: heder;
-    background-color: grey;
-}
-
-.heder img {
-    width: 60px;
-    height: 60px;
-}
-
-.nav {
-    grid-area: nav;
-    background-color: aquamarine;
-}
-
-.content {
-    grid-area: content;
-    background-color: #6590e1;
-}
