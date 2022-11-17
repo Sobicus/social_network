@@ -5,19 +5,19 @@ export const Navbar = () => {
     return (
         <nav className='nav'>
             <div className='item'>
-                <a href="#">Profile</a>
+                <a>Profile</a>
             </div>
-            <div>
-                <a href="#">Messages</a>
+            <div className='item'>
+                <a>Messages</a>
+            </div >
+            <div className='item'>
+                <a>News</a>
             </div>
-            <div>
-                <a href="#">News</a>
+            <div className='item'>
+                <a>Music</a>
             </div>
-            <div>
-                <a href="#">Music</a>
-            </div>
-            <div>
-                <a href="#">Settings</a>
+            <div className='item'>
+                <a>Settings</a>
             </div>
         </nav>
     )

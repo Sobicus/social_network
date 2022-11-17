@@ -1,5 +1,6 @@
 import React from "react";
 import './Profile.css'
+
 export const Profile = () => {
     return (
         <div className='content'>
@@ -15,10 +16,16 @@ export const Profile = () => {
                     alt=""/>
             </div>
             <div>My posts
-                <div>New Post</div>
                 <div>
-                    <div>POST 1</div>
-                    <div>POST 2</div>
+                    New Post
+                </div>
+                <div className='posts'>
+                    <div className='item'>
+                        POST 1
+                    </div>
+                    <div className='item'>
+                        POST 2
+                    </div>
                 </div>
             </div>
         </div>
