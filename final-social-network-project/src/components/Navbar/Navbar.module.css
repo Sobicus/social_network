@@ -2,6 +2,11 @@
     grid-area: nav;
     background-color: aquamarine;
 }
-.item{
+
+.item {
     color: white;
+}
+
+.active {
+    color: gold;
 }
