@@ -12,3 +12,7 @@
     grid-template-areas:'heder heder'
     'nav content';
 }
+.app_wrapper_content{
+    grid-area: content;
+    background-color: #6590e1;
+}
