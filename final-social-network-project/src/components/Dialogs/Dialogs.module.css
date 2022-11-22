@@ -6,12 +6,14 @@
 .dialogs_items {
 padding: 10px;
 }
-
+.dialogs_items .active{
+    color:gold;
+}
 .dialog {
 padding: 10px;
 }
-.dialogs_items .active{
-    color:gold;
+.dialog a{
+    text-decoration: none;
 }
 .messages {
 padding: 10px;
