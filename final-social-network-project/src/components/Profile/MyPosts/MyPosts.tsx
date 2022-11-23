@@ -32,10 +32,6 @@ export const MyPosts = () => {
             </div>
             <div className={style.posts}>
                 {postData.map(el=><Post message={el.message} likesCounter={el.likesCounter} key={el.id}/>)}
-                <Post message='It`s my first post' likesCounter={1}/>
-                <Post message='Hi, how are you?' likesCounter={5}/>
-                <Post message='GO GO GO?' likesCounter={7}/>
-                <Post message='Test props' likesCounter={13}/>
             </div>
         </div>
     )

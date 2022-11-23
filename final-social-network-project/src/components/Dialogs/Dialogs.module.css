@@ -4,21 +4,28 @@
 }
 
 .dialogs_items {
-padding: 10px;
+    padding: 10px;
 }
-.dialogs_items .active{
-    color:gold;
+
+.dialogs_items .active {
+    color: gold;
 }
+
 .dialog {
-padding: 10px;
+    padding: 10px;
 }
-.dialog a{
+.dialog.active a{
+    color: gold;
+} /*this for active dialogs color gold*/
+.dialog a {
     text-decoration: none;
+    color: white;/*this color all dialogs*/
 }
+
 .messages {
-padding: 10px;
+    padding: 10px;
 }
 
 .message {
-padding: 10px;
+    padding: 10px;
 }
