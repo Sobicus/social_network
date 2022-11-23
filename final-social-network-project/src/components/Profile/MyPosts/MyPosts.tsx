@@ -1,14 +1,13 @@
 import React from "react";
+import { postsDataType } from "../../../redux/state";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {postDataType} from "../../../index";
 
 type MyPostsType = {
-    postData:Array<postDataType>
+    postsData:Array<postsDataType>
 }
 
 export const MyPosts = (props:MyPostsType) => {
-
     return (
         <div className={style.posts_block}>
             <h3>
@@ -23,7 +22,7 @@ export const MyPosts = (props:MyPostsType) => {
                 </div>
             </div>
             <div className={style.posts}>
-                {props.postData.map(el=><Post id={el.id} message={el.message} likesCounter={el.likesCounter} key={el.id}/>)}
+                {props.postsData.map(el=><Post id={el.id} message={el.message} likesCounter={el.likesCounter} key={el.id}/>)}
             </div>
         </div>
     )
