@@ -8,24 +8,28 @@ import {Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {dialogsDataType, messageDataType, postDataType} from "./index";
 
+type AppType = {
+    postData: Array<postDataType>
+    dialogsData: Array<dialogsDataType>
+    messageData: Array<messageDataType>
+}
 
-const App = () => {
-
+const App = (props: AppType) => {
     return (
         <div className='app_wrapper'>
             <Header/>
             <Navbar/>
             <div className='app_wrapper_content'>
                 <Routes>
-                    <Route path='/profile' element={<Profile/>}/>
-                    <Route path='/dialogs/*' element={<Dialogs/>}/>
+                    <Route path='/profile' element={<Profile postData={props.postData}/>}/>
+                    <Route path='/dialogs/*' element={<Dialogs dialogsData={props.dialogsData} messageData={props.messageData}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
                 </Routes>
             </div>
-
         </div>
     );
 }
