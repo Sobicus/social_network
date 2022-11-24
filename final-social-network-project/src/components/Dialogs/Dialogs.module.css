@@ -1,6 +1,7 @@
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    justify-items: center;
 }
 
 .dialogs_items {
@@ -28,4 +29,9 @@
 
 .message {
     padding: 10px;
+    justify-self: end;
+}
+a img{
+    width: 50px;
+    border-radius: 25px;
 }
