@@ -1,5 +1,5 @@
 import React from "react";
-import {postsDataType, profilePageType} from "../../redux/state";
+import { profilePageType} from "../../redux/state";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
@@ -7,7 +7,7 @@ type ProfileType = {
     state:profilePageType
 }
 
-export const Profile = (props:ProfileType) => {
+export const Profile:React.FC<ProfileType> = (props) => {
     return (
         <div>
             <ProfileInfo/>

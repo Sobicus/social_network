@@ -7,7 +7,7 @@ type DialogItemPropsType = {
     name: string
     avatar: string
 }
-export const DialogItem = (props: DialogItemPropsType) => {
+export const DialogItem:React.FC<DialogItemPropsType> = (props) => {
     return (
         <div className={style.dialog + ' ' + style.active}>
             <NavLink to={`/dialogs/${props.id}`}>

@@ -14,7 +14,7 @@ type AppType = {
     state: stateType
 }
 
-const App = (props: AppType) => {
+const App: React.FC<AppType> = (props) => {
     return (
         <div className='app_wrapper'>
             <Header/>

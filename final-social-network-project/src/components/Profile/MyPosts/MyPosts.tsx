@@ -1,13 +1,21 @@
-import React from "react";
-import { postsDataType } from "../../../redux/state";
+import React, {RefObject} from "react";
+import {postsDataType} from "../../../redux/state";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
 type MyPostsType = {
-    postsData:Array<postsDataType>
+    postsData: Array<postsDataType>
 }
 
-export const MyPosts = (props:MyPostsType) => {
+export const MyPosts: React.FC<MyPostsType> = (props) => {
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+
+    const addNewPostHandler = () => {
+        let text = newPostElement.current?.value
+        alert(text)
+    }
+
     return (
         <div className={style.posts_block}>
             <h3>
@@ -15,14 +23,17 @@ export const MyPosts = (props:MyPostsType) => {
             </h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addNewPostHandler}>
+                        Add post
+                    </button>
                 </div>
             </div>
             <div className={style.posts}>
-                {props.postsData.map(el=><Post id={el.id} message={el.message} likesCounter={el.likesCounter} key={el.id}/>)}
+                {props.postsData.map(el => <Post id={el.id} message={el.message} likesCounter={el.likesCounter}
+                                                 key={el.id}/>)}
             </div>
         </div>
     )
