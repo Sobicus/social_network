@@ -1,19 +1,21 @@
-import React, {RefObject} from "react";
+import React from "react";
 import {postsDataType} from "../../../redux/state";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
 type MyPostsType = {
     postsData: Array<postsDataType>
+    addNewPost: (postMessage: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addNewPostHandler = () => {
+    const addNewPost = () => {
         let text = newPostElement.current?.value
-        alert(text)
+        if (text)
+            props.addNewPost(text)
     }
 
     return (
@@ -26,7 +28,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                     <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button onClick={addNewPostHandler}>
+                    <button onClick={addNewPost}>
                         Add post
                     </button>
                 </div>

@@ -1,3 +1,8 @@
+export const addNewPost = (postMessage:string) =>{
+    const newPost:postsDataType = {id: '5', message: postMessage, likesCounter: 1}
+    state.profilePage.postsData.push(newPost)
+}
+
 export const state: stateType = {
     profilePage: {
         postsData: [

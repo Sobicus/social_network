@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
@@ -12,6 +12,7 @@ import {stateType} from "./redux/state";
 
 type AppType = {
     state: stateType
+    addNewPost: (postMessage:string) => void
 }
 
 const App: React.FC<AppType> = (props) => {
@@ -21,7 +22,8 @@ const App: React.FC<AppType> = (props) => {
             <Navbar/>
             <div className='app_wrapper_content'>
                 <Routes>
-                    <Route path='/profile' element={<Profile state={props.state.profilePage}/>}/>
+                    <Route path='/profile'
+                           element={<Profile state={props.state.profilePage} addNewPost={props.addNewPost}/>}/>
                     <Route path='/dialogs/*' element={<Dialogs state={props.state.messagesPage}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
