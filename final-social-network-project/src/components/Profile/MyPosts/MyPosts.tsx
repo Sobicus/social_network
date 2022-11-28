@@ -14,8 +14,10 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     const addNewPost = () => {
         let text = newPostElement.current?.value
-        if (text)
+        if (text) {
             props.addNewPost(text)
+        }
+        text = ''
     }
 
     return (
@@ -34,8 +36,11 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                 </div>
             </div>
             <div className={style.posts}>
-                {props.postsData.map(el => <Post id={el.id} message={el.message} likesCounter={el.likesCounter}
-                                                 key={el.id}/>)}
+                {props.postsData.map(el => <Post
+                    id={el.id}
+                    message={el.message}
+                    likesCounter={el.likesCounter}
+                    key={el.id}/>)}
             </div>
         </div>
     )
