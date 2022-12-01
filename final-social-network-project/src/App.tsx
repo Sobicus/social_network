@@ -23,7 +23,7 @@ const App: React.FC<AppType> = (props) => {
             <div className='app_wrapper_content'>
                 <Routes>
                     <Route path='/profile'
-                           element={<Profile state={props.state.profilePage} addNewPost={props.addNewPost}/>}/>
+                           element={<Profile profilePage={props.state.profilePage} addNewPost={props.addNewPost}/>}/>
                     <Route path='/dialogs/*' element={<Dialogs state={props.state.messagesPage}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

@@ -5,6 +5,7 @@ import {Post} from "./Post/Post";
 
 type MyPostsType = {
     postsData: Array<postsDataType>
+    newPostText:string
     addNewPost: (postMessage: string) => void
 }
 
@@ -20,6 +21,11 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         text = ''
     }
 
+
+    const onPostChange = ()=>{
+
+    }
+
     return (
         <div className={style.posts_block}>
             <h3>
@@ -27,7 +33,10 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
             </h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange}
+                              ref={newPostElement}
+                              value={props.newPostText}
+                    />
                 </div>
                 <div>
                     <button onClick={addNewPost}>

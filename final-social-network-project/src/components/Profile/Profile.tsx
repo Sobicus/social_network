@@ -4,7 +4,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 type ProfileType = {
-    state: profilePageType
+    profilePage: profilePageType
     addNewPost: (postMessage:string) => void
 }
 
@@ -12,7 +12,11 @@ export const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.state.postsData} addNewPost={props.addNewPost}/>
+            <MyPosts
+                postsData={props.profilePage.postsData}
+                newPostText={props.profilePage.newPostText}
+                addNewPost={props.addNewPost}
+            />
         </div>
     )
 }

@@ -13,7 +13,8 @@ export const state: stateType = {
             {id: '2', message: 'Hi, how are you?', likesCounter: 5},
             {id: '3', message: 'GO GO GO?', likesCounter: 7},
             {id: '4', message: 'Test props', likesCounter: 13},
-        ]
+        ],
+        newPostText: 'it-kamasutra.com'
     },
     messagesPage: {
         dialogsData: [
@@ -36,6 +37,7 @@ export type stateType = {
 }
 export type profilePageType = {
     postsData: Array<postsDataType>
+    newPostText:string
 }
 export type messagesPageType = {
     dialogsData: Array<dialogsDataType>
