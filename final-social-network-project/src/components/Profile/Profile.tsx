@@ -5,7 +5,8 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 type ProfileType = {
     profilePage: profilePageType
-    addNewPost: (postMessage:string) => void
+    addNewPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 export const Profile: React.FC<ProfileType> = (props) => {
@@ -16,6 +17,7 @@ export const Profile: React.FC<ProfileType> = (props) => {
                 postsData={props.profilePage.postsData}
                 newPostText={props.profilePage.newPostText}
                 addNewPost={props.addNewPost}
+                updateNewPostText={props.updateNewPostText}
             />
         </div>
     )

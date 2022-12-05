@@ -8,11 +8,12 @@ import {Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType} from "./redux/state";
+import {stateType, updateNewPostText} from "./redux/state";
 
 type AppType = {
     state: stateType
-    addNewPost: (postMessage:string) => void
+    addNewPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 const App: React.FC<AppType> = (props) => {
@@ -22,8 +23,12 @@ const App: React.FC<AppType> = (props) => {
             <Navbar/>
             <div className='app_wrapper_content'>
                 <Routes>
-                    <Route path='/profile'
-                           element={<Profile profilePage={props.state.profilePage} addNewPost={props.addNewPost}/>}/>
+                    <Route path='/profile' element={<Profile
+                        profilePage={props.state.profilePage}
+                        addNewPost={props.addNewPost}
+                        updateNewPostText={props.updateNewPostText}
+                    />}
+                    />
                     <Route path='/dialogs/*' element={<Dialogs state={props.state.messagesPage}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

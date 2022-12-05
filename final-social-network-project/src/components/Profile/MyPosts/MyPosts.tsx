@@ -5,8 +5,9 @@ import {Post} from "./Post/Post";
 
 type MyPostsType = {
     postsData: Array<postsDataType>
-    newPostText:string
-    addNewPost: (postMessage: string) => void
+    newPostText: string
+    addNewPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -14,16 +15,15 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addNewPost = () => {
-        let text = newPostElement.current?.value
-        if (text) {
-            props.addNewPost(text)
-        }
-        text = ''
+        props.addNewPost()
     }
 
 
-    const onPostChange = ()=>{
-
+    const onPostChange = () => {
+        let text = newPostElement.current?.value
+        if (text) {
+            props.updateNewPostText(text)
+        }
     }
 
     return (
