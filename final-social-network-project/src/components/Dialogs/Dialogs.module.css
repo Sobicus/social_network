@@ -15,12 +15,15 @@
 .dialog {
     padding: 10px;
 }
-.dialog.active a{
+
+.dialog.active a {
     color: gold;
-} /*this for active dialogs color gold*/
+}
+
+/*this for active dialogs color gold*/
 .dialog a {
     text-decoration: none;
-    color: white;/*this color all dialogs*/
+    color: white; /*this color all dialogs*/
 }
 
 .messages {
@@ -31,7 +34,8 @@
     padding: 10px;
     justify-self: end;
 }
-a img{
+
+a img {
     width: 50px;
     border-radius: 25px;
 }
