@@ -8,7 +8,7 @@ import {Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType, updateNewPostText} from "./redux/state";
+import {stateType} from "./redux/state";
 
 type AppType = {
     state: stateType

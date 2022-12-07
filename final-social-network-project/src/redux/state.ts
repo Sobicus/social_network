@@ -44,24 +44,35 @@ export let store: storeType = {
             ]
         },
     },
-    rerenderEntireTree(state: stateType) {
+    getState(){
+        return this._state
+    },
+    _callSubscriber(state: stateType) {
         console.log('State changed')
     },
     addNewPost() {
-        const newPost: postsDataType = {id: '5', message: state.profilePage.newPostText, likesCounter: 1}
-        state.profilePage.postsData.push(newPost)
-        state.profilePage.newPostText = ''
-        rerenderEntireTree(state)
+        const newPost: postsDataType = {id: '5', message: this._state.profilePage.newPostText, likesCounter: 1}
+        this._state.profilePage.postsData.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber(this._state)
     },
-    updateNewPostText = (newText: string) => {
-        state.profilePage.newPostText = newText
-        rerenderEntireTree(state)
+    updateNewPostText(newText: string) {
+        this._state.profilePage.newPostText = newText
+        this._callSubscriber(this._state)
     },
     subscribe(observer: (state: stateType) => void) {
-        rerenderEntireTree = observer
+        this._callSubscriber = observer
     }
 }
 
+export type storeType = {
+    _state:stateType
+    getState:()=>stateType
+    _callSubscriber: (state: stateType)=>void
+    addNewPost:()=>void
+    updateNewPostText : (newText: string) => void
+    subscribe:(observer: (state: stateType) => void)=>void
+}
 // let rerenderEntireTree = (state: stateType) => {
 //     console.log('State changed')
 // }
@@ -152,9 +163,3 @@ export type postsDataType = {
 }
 
 
-export type storeType = {
-    _state:stateType
-    rerenderEntireTree: (state: stateType)=>void
-    addNewPost:()=>void
-    updateNewPostText : (newText: string) => void
-}
