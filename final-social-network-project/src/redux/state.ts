@@ -51,7 +51,11 @@ export let store: storeType = {
         console.log('State changed')
     },
     addNewPost() {
-        const newPost: postsDataType = {id: '5', message: this._state.profilePage.newPostText, likesCounter: 1}
+        const newPost: postsDataType = {
+            id: '5',
+            message: this._state.profilePage.newPostText,
+            likesCounter: 1
+        }
         this._state.profilePage.postsData.push(newPost)
         this._state.profilePage.newPostText = ''
         this._callSubscriber(this._state)

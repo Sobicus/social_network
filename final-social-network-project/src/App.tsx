@@ -17,6 +17,7 @@ type AppType = {
 }
 
 const App: React.FC<AppType> = (props) => {
+    debugger
     return (
         <div className='app_wrapper'>
             <Header/>
