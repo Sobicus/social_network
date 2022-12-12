@@ -13,14 +13,12 @@ const root = ReactDOM.createRoot(
 );
 
 const rerenderEntireTree= (state: stateType) => {
-
     root.render(
         <React.StrictMode>
             <BrowserRouter>
                 <App
                     state={store.getState()}
-                    addNewPost={store.addNewPost.bind(store)}
-                    updateNewPostText={store.updateNewPostText.bind(store)}
+                    dispatch={store.dispatch.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
@@ -8,16 +8,14 @@ import {Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType} from "./redux/state";
+import {ActionsType, stateType} from "./redux/state";
 
 type AppType = {
     state: stateType
-    addNewPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action:ActionsType) => void
 }
 
 const App: React.FC<AppType> = (props) => {
-    debugger
     return (
         <div className='app_wrapper'>
             <Header/>
@@ -26,9 +24,7 @@ const App: React.FC<AppType> = (props) => {
                 <Routes>
                     <Route path='/profile' element={<Profile
                         profilePage={props.state.profilePage}
-                        addNewPost={props.addNewPost}
-                        updateNewPostText={props.updateNewPostText}
-                    />}
+                        dispatch={props.dispatch}/>}
                     />
                     <Route path='/dialogs/*' element={<Dialogs state={props.state.messagesPage}/>}/>
                     <Route path='/news' element={<News/>}/>
