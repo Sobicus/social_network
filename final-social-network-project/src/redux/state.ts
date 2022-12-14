@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 export let store: storeType = {
     _state: {
@@ -10,7 +12,7 @@ export let store: storeType = {
                 {id: '3', message: 'GO GO GO?', likesCounter: 7},
                 {id: '4', message: 'Test props', likesCounter: 13},
             ],
-            newPostText: ''
+            newPostText: '',
         },
         messagesPage: {
             dialogsData: [
@@ -44,36 +46,22 @@ export let store: storeType = {
                 {id: '1', message: 'Hi'},
                 {id: '2', message: 'How are you?'},
                 {id: '3', message: 'Good, and you?'},
-            ]
+            ],
+            newMessageBody: '',
         },
     },
     _callSubscriber(state: stateType) {
         console.log('State changed')
     },
 
-    getState(){
+    getState() {
         return this._state
     },
     subscribe(observer: (state: stateType) => void) {
         this._callSubscriber = observer
     },
-
-    // addNewPost() {
-    //     const newPost: postsDataType = {
-    //         id: '5',
-    //         message: this._state.profilePage.newPostText,
-    //         likesCounter: 1
-    //     }
-    //     this._state.profilePage.postsData.push(newPost)
-    //     this._state.profilePage.newPostText = ''
-    //     this._callSubscriber(this._state)
-    // },
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._callSubscriber(this._state)
-    // },
-    dispatch(action){
-        if(action.type === ADD_POST){
+    dispatch(action) {
+        if (action.type === ADD_POST) {
             const newPost: postsDataType = {
                 id: '5',
                 message: this._state.profilePage.newPostText,
@@ -82,103 +70,69 @@ export let store: storeType = {
             this._state.profilePage.postsData.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT){
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.messagesPage.newMessageBody = action.body
+            this._callSubscriber(this._state)
+        } else if (action.type === SEND_MESSAGE) {
+            const newMessage: messageDataType = {
+                id: '1',
+                message: this._state.messagesPage.newMessageBody
+            }
+            this._state.messagesPage.newMessageBody = ''
+            this._state.messagesPage.messageData.push(newMessage)
             this._callSubscriber(this._state)
         }
     }
 }
 
-export const addPostAC = ():AddPostActionType => {
+export const addPostAC = (): AddPostACType => {
     return {
         type: ADD_POST
     }
 }
-export const updateNewPostTextAC = (text:string):UpdateNewPostTextAction => {
+export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
     }
 }
-
-export type storeType = {
-    _state:stateType
-    getState:()=>stateType
-    _callSubscriber: (state: stateType)=>void
-    // addNewPost:()=>void
-    // updateNewPostText : (newText: string) => void
-    subscribe:(observer: (state: stateType) => void)=>void
-    dispatch:(action:ActionsType)=>void
+export const sendMessageAC = (): sendMessageACType => {
+    return {
+        type: SEND_MESSAGE
+    }
 }
-// let rerenderEntireTree = (state: stateType) => {
-//     console.log('State changed')
-// }
-// export const addNewPost = () => {
-//     const newPost: postsDataType = {id: '5', message: state.profilePage.newPostText, likesCounter: 1}
-//     state.profilePage.postsData.push(newPost)
-//     state.profilePage.newPostText = ''
-//     rerenderEntireTree(state)
-// }
-// export const updateNewPostText = (newText: string) => {
-//     state.profilePage.newPostText = newText
-//     rerenderEntireTree(state)
-// }
-// export const subscribe = (observer: (state: stateType) => void) => {
-//     rerenderEntireTree = observer
-// }
-// export const state: stateType = {
-//     profilePage: {
-//         postsData: [
-//             {id: '1', message: 'It`s my first post', likesCounter: 1},
-//             {id: '2', message: 'Hi, how are you?', likesCounter: 5},
-//             {id: '3', message: 'GO GO GO?', likesCounter: 7},
-//             {id: '4', message: 'Test props', likesCounter: 13},
-//         ],
-//         newPostText: ''
-//     },
-//     messagesPage: {
-//         dialogsData: [
-//             {
-//                 id: '1',
-//                 name: 'Max',
-//                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhBStQk5WBxo9GGOnZ8vLmViRGavDshthEnw&usqp=CAU"
-//             },
-//             {
-//                 id: '2',
-//                 name: 'Alina',
-//                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhBStQk5WBxo9GGOnZ8vLmViRGavDshthEnw&usqp=CAU"
-//             },
-//             {
-//                 id: '3',
-//                 name: 'Vika',
-//                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhBStQk5WBxo9GGOnZ8vLmViRGavDshthEnw&usqp=CAU"
-//             },
-//             {
-//                 id: '4',
-//                 name: 'Lubov',
-//                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhBStQk5WBxo9GGOnZ8vLmViRGavDshthEnw&usqp=CAU"
-//             },
-//             {
-//                 id: '5',
-//                 name: 'Anatoliy',
-//                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhBStQk5WBxo9GGOnZ8vLmViRGavDshthEnw&usqp=CAU"
-//             },
-//         ],
-//         messageData: [
-//             {id: '1', message: 'Hi'},
-//             {id: '2', message: 'How are you?'},
-//             {id: '3', message: 'Good, and you?'},
-//         ]
-//     },
-// }
-export type ActionsType = AddPostActionType | UpdateNewPostTextAction
-type AddPostActionType ={
+export const updateNewMessageBodyAC = (body: string): updateNewMessageBodyACType => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
+    }
+}
+
+export type ActionsType = AddPostACType | UpdateNewPostTextACType | sendMessageACType | updateNewMessageBodyACType
+type AddPostACType = {
     type: 'ADD-POST'
 }
-type UpdateNewPostTextAction ={ type: 'UPDATE-NEW-POST-TEXT'
-    newText:string
+type UpdateNewPostTextACType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
 }
-
+type sendMessageACType = {
+    type: 'SEND-MESSAGE'
+}
+type updateNewMessageBodyACType = {
+    type: 'UPDATE-NEW-MESSAGE-BODY'
+    body: string
+}
+export type storeType = {
+    _state: stateType
+    getState: () => stateType
+    _callSubscriber: (state: stateType) => void
+    subscribe: (observer: (state: stateType) => void) => void
+    dispatch: (action: ActionsType) => void
+}
 export type stateType = {
     profilePage: profilePageType
     messagesPage: messagesPageType
@@ -190,6 +144,7 @@ export type profilePageType = {
 export type messagesPageType = {
     dialogsData: Array<dialogsDataType>
     messageData: Array<messageDataType>
+    newMessageBody: string
 }
 export type messageDataType = {
     id: string
