@@ -1,4 +1,4 @@
-import {messageDataType, postsDataType} from "./state";
+import { postsDataType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -25,13 +25,13 @@ export const profileReducer = (state: any, action: ActionsPostType) => {
 export const addPostAC = (): AddPostACType => {
     return {
         type: ADD_POST
-    }
+    } as const
 }
 export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
-    }
+    } as const
 }
 
 type AddPostACType = {

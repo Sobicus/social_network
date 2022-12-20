@@ -1,4 +1,4 @@
-import {messageDataType, postsDataType} from "./state";
+import {messageDataType, postsDataType} from "./store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
@@ -36,13 +36,13 @@ export const dialogsReducer = (state: any, action: ActionsSendMessageType) => {
 export const sendMessageAC = (): sendMessageACType => {
     return {
         type: SEND_MESSAGE
-    }
+    }as const
 }
 export const updateNewMessageBodyAC = (body: string): updateNewMessageBodyACType => {
     return {
         type: UPDATE_NEW_MESSAGE_BODY,
         body: body
-    }
+    }as const
 }
 
 type sendMessageACType = {

@@ -1,5 +1,5 @@
 import React from "react";
-import {ActionsType, profilePageType} from "../../redux/state";
+import {ActionsType, profilePageType} from "../../redux/store";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
