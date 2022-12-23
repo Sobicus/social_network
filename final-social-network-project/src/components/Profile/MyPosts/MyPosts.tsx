@@ -1,15 +1,16 @@
 import React from "react";
 import {
+    ActionsType,
     postsDataType,
-    } from "../../../redux/store";
+} from "../../../redux/store";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionsPostType, addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 type MyPostsType = {
     postsData: Array<postsDataType>
     newPostText: string
-    dispatch: (action: ActionsPostType) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {

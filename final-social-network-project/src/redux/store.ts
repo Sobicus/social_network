@@ -1,5 +1,5 @@
-import {ActionsPostType, profileReducer} from "./profile-reducer";
-import {ActionsSendMessageType, dialogsReducer} from "./dialogs-reducer";
+import {AddPostACType, profileReducer, UpdateNewPostTextACType} from "./profile-reducer";
+import {dialogsReducer, sendMessageACType, updateNewMessageBodyACType} from "./dialogs-reducer";
 
 // const ADD_POST = 'ADD-POST';
 // const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -70,13 +70,14 @@ export let store: storeType = {
         this._callSubscriber(this._state)
     }
 }
-type ActionType = ActionsPostType | ActionsSendMessageType
+export type ActionsType = AddPostACType | UpdateNewPostTextACType | sendMessageACType | updateNewMessageBodyACType
+
 export type storeType = {
     _state: stateType
     getState: () => stateType
     _callSubscriber: (state: stateType) => void
     subscribe: (observer: (state: stateType) => void) => void
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsType) => void
 }
 export type stateType = {
     profilePage: profilePageType
