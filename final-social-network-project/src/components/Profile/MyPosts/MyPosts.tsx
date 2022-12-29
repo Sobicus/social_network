@@ -17,24 +17,14 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    // const addNewPost = () => {
-    //     props.dispatch({type: 'ADD-POST'})
-    // }
-    const addNewPost = () => {
-        props.dispatch(addPostAC())
+    const onAddPost = () => {
+        props.addPost()
     }
 
-    // const onPostChange = () => {
-    //     let text = newPostElement.current?.value
-    //     if (text) {
-    //         props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
-    //     }
-    // }
     const onPostChange = () => {
         let text = newPostElement.current?.value
-        if (text) {
-            props.dispatch(updateNewPostTextAC(text))
-        }
+        props.updateNewPostText(text)
+
     }
 
     return (
@@ -50,7 +40,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                     />
                 </div>
                 <div>
-                    <button onClick={addNewPost}>
+                    <button onClick={onAddPost}>
                         Add post
                     </button>
                 </div>
