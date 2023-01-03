@@ -6,14 +6,14 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {RootStateType} from "../../redux/redux-store";
 
 type ProfileType = {
-    store:RootStateType
+
 }
 
 export const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer/>
             {/*<MyPosts*/}
             {/*    postsData={props.profilePage.postsData}*/}
             {/*    newPostText={props.profilePage.newPostText}*/}
