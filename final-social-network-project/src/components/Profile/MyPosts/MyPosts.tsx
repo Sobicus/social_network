@@ -5,12 +5,15 @@ import {
 } from "../../../redux/store";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 type MyPostsType = {
-    postsData: Array<postsDataType>
-    newPostText: string
-    dispatch: (action: ActionsType) => void
+    // postsData: Array<postsDataType>
+    // newPostText: string
+    // dispatch: (action: ActionsType) => void
+    posts:Array<postsDataType>
+    newPostText:string
+    addPost:()=>void
+    updateNewPostText:(text:string)=>void
 }
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -23,8 +26,8 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     const onPostChange = () => {
         let text = newPostElement.current?.value
+        if(text)
         props.updateNewPostText(text)
-
     }
 
     return (
@@ -46,7 +49,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                 </div>
             </div>
             <div className={style.posts}>
-                {props.postsData.map(el => <Post
+                {props.posts.map(el => <Post
                     id={el.id}
                     message={el.message}
                     likesCounter={el.likesCounter}

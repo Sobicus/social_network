@@ -11,11 +11,11 @@ type DialogsType = {
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-
-    let state = props.store.messagesPage
+debugger
+    let state = props.messagesPage
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
-    let newMessageBody = props.store._state.messagesPage.newMessageBody
+    let newMessageBody = props.messagesPage.newMessageBody
 
 
     const onSendMessageClick = () => {
