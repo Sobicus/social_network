@@ -11,7 +11,6 @@ type DialogsType = {
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-debugger
     let state = props.messagesPage
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()

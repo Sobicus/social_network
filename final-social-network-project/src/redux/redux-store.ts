@@ -1,10 +1,10 @@
-import {combineReducers, createStore} from "@reduxjs/toolkit";
+import {applyMiddleware, combineReducers, createStore} from "@reduxjs/toolkit";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 
 let rootReducer = combineReducers({
    profilePage: profileReducer,
-   dialogsPage: dialogsReducer
+   messagesPage: dialogsReducer
 })
 
 export const store = createStore(rootReducer)

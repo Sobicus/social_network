@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    ActionsType,
     postsDataType,
 } from "../../../redux/store";
 import style from './MyPosts.module.css'
@@ -10,10 +9,10 @@ type MyPostsType = {
     // postsData: Array<postsDataType>
     // newPostText: string
     // dispatch: (action: ActionsType) => void
-    posts:Array<postsDataType>
-    newPostText:string
-    addPost:()=>void
-    updateNewPostText:(text:string)=>void
+    posts: Array<postsDataType>
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -26,8 +25,8 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     const onPostChange = () => {
         let text = newPostElement.current?.value
-        if(text)
-        props.updateNewPostText(text)
+        if (text)
+            props.updateNewPostText(text)
     }
 
     return (
