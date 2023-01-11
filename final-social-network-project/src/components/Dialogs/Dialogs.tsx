@@ -1,20 +1,20 @@
 import style from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {messagesPageType} from '../../redux/store';
+import {dialogsPageType} from '../../redux/store';
 import React, {ChangeEvent} from "react";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
-    messagesPage: messagesPageType
+    dialogsPage: dialogsPageType
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-    let state = props.messagesPage
+    let state = props.dialogsPage
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
-    let newMessageBody = props.messagesPage.newMessageBody
+    let newMessageBody = props.dialogsPage.newMessageBody
 
 
     const onSendMessageClick = () => {
