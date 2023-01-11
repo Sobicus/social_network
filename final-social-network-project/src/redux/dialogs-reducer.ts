@@ -44,16 +44,14 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
-            stateCopy = {...state, newMessageBody: action.body}
-            return stateCopy
+            return {...state, newMessageBody: action.body}
         }
         case SEND_MESSAGE: {
             let newMessage: messageDataType = {
                 id: '1',
                 message: state.newMessageBody
             }
-            stateCopy = {...state, messageData: [...state.messageData, newMessage],newMessageBody: ''}
-            return stateCopy
+            return {...state, messageData: [...state.messageData, newMessage],newMessageBody: ''}
         }
         default:
             return state
