@@ -40,8 +40,6 @@ let initialState =
         newMessageBody: '',
     }
 export const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsType) => {
-    let stateCopy
-
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
             return {...state, newMessageBody: action.body}
@@ -51,7 +49,7 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: Ac
                 id: '1',
                 message: state.newMessageBody
             }
-            return {...state, messageData: [...state.messageData, newMessage],newMessageBody: ''}
+            return {...state, messageData: [...state.messageData, newMessage], newMessageBody: ''}
         }
         default:
             return state

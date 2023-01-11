@@ -1,8 +1,8 @@
+import React, {ChangeEvent} from "react";
 import style from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {dialogsPageType} from '../../redux/store';
-import React, {ChangeEvent} from "react";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void

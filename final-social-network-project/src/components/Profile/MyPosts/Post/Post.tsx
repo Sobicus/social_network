@@ -7,7 +7,7 @@ type postPropsType = {
     likesCounter: number
 }
 
-export const Post:React.FC<postPropsType> = (props) => {
+export const Post: React.FC<postPropsType> = (props) => {
     return (
         <div className={style.item}>
             <img

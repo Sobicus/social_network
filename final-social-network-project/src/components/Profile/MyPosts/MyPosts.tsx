@@ -1,14 +1,9 @@
 import React from "react";
-import {
-    postsDataType,
-} from "../../../redux/store";
+import {postsDataType} from "../../../redux/store";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
 type MyPostsType = {
-    // postsData: Array<postsDataType>
-    // newPostText: string
-    // dispatch: (action: ActionsType) => void
     posts: Array<postsDataType>
     newPostText: string
     addPost: () => void
