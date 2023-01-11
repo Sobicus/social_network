@@ -40,42 +40,25 @@ let initialState =
         newMessageBody: '',
     }
 export const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsType) => {
+    let stateCopy
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
-            // state.newMessageBody = action.body
-            // return state
-            let copyState = {...state}
-            copyState.newMessageBody = action.body
-            return copyState
+            stateCopy = {...state, newMessageBody: action.body}
+            return stateCopy
         }
-        case SEND_MESSAGE:{
-            const newMessage: messageDataType = {
+        case SEND_MESSAGE: {
+            let newMessage: messageDataType = {
                 id: '1',
                 message: state.newMessageBody
             }
-            // state.newMessageBody = ''
-            // state.messageData.push(newMessage)
-            // return state
-            let copyState = {...state}
-            copyState.newMessageBody=''
-            copyState.messageData.push(newMessage)
-            return copyState
+            stateCopy = {...state, messageData: [...state.messageData, newMessage],newMessageBody: ''}
+            return stateCopy
         }
         default:
             return state
 
     }
-    // if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-    //      state.newMessageBody = action.body
-    //  } else if (action.type === SEND_MESSAGE) {
-    //      const newMessage: messageDataType = {
-    //          id: '1',
-    //          message: state.newMessageBody
-    //      }
-    //      state.newMessageBody = ''
-    //      state.messageData.push(newMessage)
-    //  }
-
 }
 
 export const sendMessageAC = (): sendMessageACType => {
