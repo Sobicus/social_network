@@ -1,9 +1,13 @@
 import React from 'react'
+import {usersStateType} from "../../redux/store";
 
-export const Users = () => {
+type usersPropsType={
+    users:Array<usersStateType>
+}
+export const Users = (props:usersPropsType) => {
     return (
         <div>
-            Users will be here
+            {}
         </div>
     )
 }

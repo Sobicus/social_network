@@ -47,6 +47,46 @@ export let store: storeType = {
             ],
             newMessageBody: '',
         },
+        usersPage: {
+            users: [
+                {
+                    id: '1',
+                    followed: false,
+                    fullName: 'Dmitriy',
+                    status: 'I am a boss',
+                    location: {city: 'Kyiv', country: 'Ukraine'}
+                },
+                {
+                    id: '2',
+                    followed: true,
+                    fullName: 'Maksim',
+                    status: 'Hard work',
+                    location: {city: 'Odessa', country: 'Ukraine'}
+                },
+                {
+                    id: '3',
+                    followed: true,
+                    fullName: 'Alina',
+                    status: 'Business lady',
+                    location: {city: 'Altea', country: 'Spain'}
+                },
+                {
+                    id: '4',
+                    followed: true,
+                    fullName: 'Vika',
+                    status: 'Just for fun',
+                    location: {city: 'New-York', country: 'USA'}
+                },
+                {
+                    id: '5',
+                    followed: false,
+                    fullName: 'Emiliia',
+                    status: 'Life is game',
+                    location: {city: 'Ottawa', country: 'Canada'}
+                },
+            ],
+        },
+
     },
     _callSubscriber(state: stateType) {
         console.log('State changed')
@@ -77,6 +117,7 @@ export type storeType = {
 export type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
+    usersPage: usersPageType
 }
 export type profilePageType = {
     postsData: Array<postsDataType>
@@ -101,5 +142,18 @@ export type postsDataType = {
     message: string
     likesCounter: number
 }
-
+export type usersPageType = {
+    users: Array<usersStateType>
+}
+export type usersStateType = {
+    id: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: usersLocationStateType
+}
+type usersLocationStateType = {
+    city: string
+    country: string
+}
 

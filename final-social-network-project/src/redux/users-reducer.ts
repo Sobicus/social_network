@@ -1,5 +1,8 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+import {usersPageType, usersStateType} from "./store";
+
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET-USERS';
 
 let initialState = {
     users: [
@@ -22,7 +25,7 @@ let initialState = {
             followed: true,
             fullName: 'Alina',
             status: 'Business lady',
-            location: {city: 'Altea', country: 'Spaine'}
+            location: {city: 'Altea', country: 'Spain'}
         },
         {
             id: '4',
@@ -37,19 +40,42 @@ let initialState = {
             fullName: 'Emiliia',
             status: 'Life is game',
             location: {city: 'Ottawa', country: 'Canada'}
-        },
+        }
     ]
 }
-export const usersReducer = (state: any = initialState, action: any) => {
+export const usersReducer = (state: usersPageType = initialState, action: UsersReducerActionType) => {
     switch (action.type) {
+        case "SET-USERS":{
+            return {...state, users: [...state.users, ...action.users]}
+        }
+        case "FOLLOW": {
+            return {
+                ...state, users: state.users.map(el => el.id === action.userID ? el.followed = true : el)
+            }
+        }
+        case "UNFOLLOW": {
+            return {...state, users: state.users.map(el => el.id === action.userID ? {...el, followed: false} : el)}
+        }
         default:
             return state
-
     }
 }
-
-export const followAC = () => {
+export const setUsersAC = (users: Array<usersStateType>) => {
+    return {type: SET_USERS, users} as const
+}
+export const followAC = (userID: string) => {
     return {
-        type: 'FOLLOW'
+        type: FOLLOW,
+        userID
     } as const
 }
+export const unfollowAC = (userID: string) => {
+    return {
+        type: UNFOLLOW,
+        userID
+    } as const
+}
+type setUsersACType = ReturnType<typeof setUsersAC>
+type FollowACType = ReturnType<typeof followAC>
+type UnfollowACType = ReturnType<typeof unfollowAC>
+export type UsersReducerActionType = FollowACType | UnfollowACType | setUsersACType
