@@ -3,7 +3,7 @@ import {ActionsType, postsDataType, profilePageType} from "./store";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-let initialState = {
+let initialState:profilePageType = {
     postsData: [
         {id: '1', message: 'It`s my first post', likesCounter: 1},
         {id: '2', message: 'Hi, how are you?', likesCounter: 5},

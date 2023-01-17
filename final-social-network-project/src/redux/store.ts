@@ -51,6 +51,7 @@ export let store: storeType = {
             users: [
                 {
                     id: '1',
+                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
                     followed: false,
                     fullName: 'Dmitriy',
                     status: 'I am a boss',
@@ -58,6 +59,7 @@ export let store: storeType = {
                 },
                 {
                     id: '2',
+                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
                     followed: true,
                     fullName: 'Maksim',
                     status: 'Hard work',
@@ -65,6 +67,7 @@ export let store: storeType = {
                 },
                 {
                     id: '3',
+                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
                     followed: true,
                     fullName: 'Alina',
                     status: 'Business lady',
@@ -72,6 +75,7 @@ export let store: storeType = {
                 },
                 {
                     id: '4',
+                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
                     followed: true,
                     fullName: 'Vika',
                     status: 'Just for fun',
@@ -79,6 +83,7 @@ export let store: storeType = {
                 },
                 {
                     id: '5',
+                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
                     followed: false,
                     fullName: 'Emiliia',
                     status: 'Life is game',
@@ -147,6 +152,7 @@ export type usersPageType = {
 }
 export type usersStateType = {
     id: string
+    photoUrl:string
     followed: boolean
     fullName: string
     status: string
