@@ -50,44 +50,28 @@ export let store: storeType = {
         usersPage: {
             users: [
                 {
-                    id: '1',
-                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-                    followed: false,
-                    fullName: 'Dmitriy',
+                    name: 'Alina',
+                    id: 1,
+                    uniqueUrlName: 'test',
+                    photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
                     status: 'I am a boss',
-                    location: {city: 'Kyiv', country: 'Ukraine'}
+                    followed: false
                 },
                 {
-                    id: '2',
-                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-                    followed: true,
-                    fullName: 'Maksim',
-                    status: 'Hard work',
-                    location: {city: 'Odessa', country: 'Ukraine'}
+                    name: 'Max',
+                    id: 2,
+                    uniqueUrlName: 'test',
+                    photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
+                    status: 'I am a boss',
+                    followed: true
                 },
                 {
-                    id: '3',
-                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-                    followed: true,
-                    fullName: 'Alina',
-                    status: 'Business lady',
-                    location: {city: 'Altea', country: 'Spain'}
-                },
-                {
-                    id: '4',
-                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-                    followed: true,
-                    fullName: 'Vika',
-                    status: 'Just for fun',
-                    location: {city: 'New-York', country: 'USA'}
-                },
-                {
-                    id: '5',
-                    photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-                    followed: false,
-                    fullName: 'Emiliia',
-                    status: 'Life is game',
-                    location: {city: 'Ottawa', country: 'Canada'}
+                    name: 'Vika',
+                    id: 3,
+                    uniqueUrlName: 'test',
+                    photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
+                    status: 'I am a boss',
+                    followed: false
                 },
             ],
         },
@@ -151,15 +135,15 @@ export type usersPageType = {
     users: Array<usersStateType>
 }
 export type usersStateType = {
-    id: string
-    photoUrl:string
-    followed: boolean
-    fullName: string
+    name: string
+    id: number
+    uniqueUrlName:string
+    photos: usersPhotosStateType
     status: string
-    location: usersLocationStateType
+    followed: boolean
 }
-type usersLocationStateType = {
-    city: string
-    country: string
+type usersPhotosStateType = {
+    small: string
+    large: string
 }
 

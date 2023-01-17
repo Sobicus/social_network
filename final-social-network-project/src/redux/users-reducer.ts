@@ -7,45 +7,29 @@ const SET_USERS = 'SET-USERS';
 let initialState:usersPageType = {
     users: [
         // {
-        //     id: '1',
-        //     photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-        //     followed: false,
-        //     fullName: 'Dmitriy',
+        //     name: 'Alina',
+        //     id: 1,
+        //     uniqueUrlName: 'test',
+        //     photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
         //     status: 'I am a boss',
-        //     location: {city: 'Kyiv', country: 'Ukraine'}
+        //     followed: false
         // },
         // {
-        //     id: '2',
-        //     photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-        //     followed: true,
-        //     fullName: 'Maksim',
-        //     status: 'Hard work',
-        //     location: {city: 'Odessa', country: 'Ukraine'}
+        //     name: 'Max',
+        //     id: 2,
+        //     uniqueUrlName: 'test',
+        //     photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
+        //     status: 'I am a boss',
+        //     followed: true
         // },
         // {
-        //     id: '3',
-        //     photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-        //     followed: true,
-        //     fullName: 'Alina',
-        //     status: 'Business lady',
-        //     location: {city: 'Altea', country: 'Spain'}
+        //     name: 'Vika',
+        //     id: 3,
+        //     uniqueUrlName: 'test',
+        //     photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
+        //     status: 'I am a boss',
+        //     followed: false
         // },
-        // {
-        //     id: '4',
-        //     photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-        //     followed: true,
-        //     fullName: 'Vika',
-        //     status: 'Just for fun',
-        //     location: {city: 'New-York', country: 'USA'}
-        // },
-        // {
-        //     id: '5',
-        //     photoUrl:'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top',
-        //     followed: false,
-        //     fullName: 'Emiliia',
-        //     status: 'Life is game',
-        //     location: {city: 'Ottawa', country: 'Canada'}
-        // }
     ]
 }
 export const usersReducer = (state: usersPageType = initialState, action: UsersReducerActionType) => {
@@ -68,13 +52,13 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersR
 export const setUsersAC = (users: Array<usersStateType>) => {
     return {type: SET_USERS, users} as const
 }
-export const followAC = (userID: string) => {
+export const followAC = (userID: number) => {
     return {
         type: FOLLOW,
         userID
     } as const
 }
-export const unfollowAC = (userID: string) => {
+export const unfollowAC = (userID: number) => {
     return {
         type: UNFOLLOW,
         userID
