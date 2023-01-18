@@ -18,6 +18,11 @@ export const Navbar = () => {
                 }>Messages</NavLink>
             </div>
             <div className={style.item}>
+                <NavLink to='/users' className={({isActive}) =>
+                    isActive ? style.active : undefined
+                }>Users</NavLink>
+            </div>
+            <div className={style.item}>
                 <NavLink to='/news' className={({isActive}) =>
                     isActive ? style.active : undefined
                 }>News</NavLink>
