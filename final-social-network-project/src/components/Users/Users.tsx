@@ -28,40 +28,18 @@ type usersPhotosStateType = {
     large: string
 }
 export const Users = (props: usersPropsType) => {
-    if (props.users.length === 0) {
-        axios.get<responseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
-        })
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get<responseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
-    // if (props.users.length === 0) {
-    //     props.setUsers([{
-    //         name: 'Alina',
-    //         id: 1,
-    //         uniqueUrlName: 'test',
-    //         photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
-    //         status: 'I am a boss',
-    //         followed: false
-    //     },
-    //         {
-    //             name: 'Max',
-    //             id: 2,
-    //             uniqueUrlName: 'test',
-    //             photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
-    //             status: 'I am a boss',
-    //             followed: true
-    //         },
-    //         {
-    //             name: 'Vika',
-    //             id: 3,
-    //             uniqueUrlName: 'test',
-    //             photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
-    //             status: 'I am a boss',
-    //             followed: false
-    //         },])
-    // }
+
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div><
