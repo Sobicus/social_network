@@ -29,19 +29,11 @@ type usersPhotosStateType = {
 }
 
 export class Users extends React.Component<usersPropsType, {}>{
-    constructor(props:usersPropsType) {
-        super(props);
-            axios.get<responseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                this.props.setUsers(response.data.items)
-            })
+       componentDidMount() {
+        axios.get<responseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            this.props.setUsers(response.data.items)
+        })
     }
-    // getUsers = () => {
-    //     if (this.props.users.length === 0) {
-    //         axios.get<responseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-    //             this.props.setUsers(response.data.items)
-    //         })
-    //     }
-    // }
     render() {
         return (
             <div>
