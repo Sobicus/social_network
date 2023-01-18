@@ -3,8 +3,9 @@ import {usersPageType, usersStateType} from "./store";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 
-let initialState:usersPageType = {
+let initialState: usersPageType = {
     users: [
         // {
         //     name: 'Alina',
@@ -30,20 +31,26 @@ let initialState:usersPageType = {
         //     status: 'I am a boss',
         //     followed: false
         // },
-    ]
+    ],
+    pageSize: 5,
+    totalUsersCount: 100 ,
+    currentPage: 2,
 }
 export const usersReducer = (state: usersPageType = initialState, action: UsersReducerActionType) => {
     switch (action.type) {
-        case "SET-USERS":{
-            return {...state, users: [...state.users, ...action.users]}
+        case SET_USERS: {
+            return {...state, users: action.users}
         }
-        case "FOLLOW": {
+        case FOLLOW: {
             return {
                 ...state, users: state.users.map(el => el.id === action.userID ? el.followed = true : el)
             }
         }
-        case "UNFOLLOW": {
+        case UNFOLLOW: {
             return {...state, users: state.users.map(el => el.id === action.userID ? {...el, followed: false} : el)}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
         }
         default:
             return state
@@ -64,7 +71,11 @@ export const unfollowAC = (userID: number) => {
         userID
     } as const
 }
+export const setCurrentPageAC = (currentPage: number) => {
+    return {type: SET_CURRENT_PAGE, currentPage} as const
+}
+type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>
 type UnfollowACType = ReturnType<typeof unfollowAC>
-export type UsersReducerActionType = FollowACType | UnfollowACType | setUsersACType
+export type UsersReducerActionType = FollowACType | UnfollowACType | setUsersACType | setCurrentPageACType
