@@ -7,32 +7,7 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 
 let initialState: usersPageType = {
-    users: [
-        // {
-        //     name: 'Alina',
-        //     id: 1,
-        //     uniqueUrlName: 'test',
-        //     photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
-        //     status: 'I am a boss',
-        //     followed: false
-        // },
-        // {
-        //     name: 'Max',
-        //     id: 2,
-        //     uniqueUrlName: 'test',
-        //     photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
-        //     status: 'I am a boss',
-        //     followed: true
-        // },
-        // {
-        //     name: 'Vika',
-        //     id: 3,
-        //     uniqueUrlName: 'test',
-        //     photos: {small: "null", large: 'https://cdn.dribbble.com/users/3734064/screenshots/14348087/media/a99ab961c8f8c7d29b5f7136e0b19ca4.png?compress=1&resize=400x300&vertical=top'},
-        //     status: 'I am a boss',
-        //     followed: false
-        // },
-    ],
+    users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
