@@ -13,6 +13,7 @@ type usersPropsType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setCurrentPage:(pageNumber:number)=>void
+    setTotalUsersCount:(totalUsersCount:number)=>void
 }
 type responseType = {
     items: Array<responseItemType>
@@ -36,6 +37,7 @@ export class Users extends React.Component<usersPropsType, {}> {
     componentDidMount() {
         axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
         })
     }
 
