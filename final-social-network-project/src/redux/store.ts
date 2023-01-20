@@ -147,6 +147,7 @@ export type usersPageType = {
     pageSize: number,
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type usersStateType = {
     name: string

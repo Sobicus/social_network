@@ -3,8 +3,15 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {stateType, usersStateType} from "../../redux/store";
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC} from "../../redux/users-reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setUsersAC,
+    setUsersTotalCountAC,
+    toggleIsFetchingAC
+} from "../../redux/users-reducer";
 import {Users} from "./Users";
+import { Preloader } from "../common/preloader/Preloader";
 
 type usersPropsType = {
     users: Array<usersStateType>
@@ -14,8 +21,10 @@ type usersPropsType = {
     setUsers: (users: Array<usersStateType>) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    setCurrentPage:(pageNumber:number)=>void
-    setTotalUsersCount:(totalUsersCount:number)=>void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
+    isFetching: boolean
+    toggleIsFetching: (isFetching: boolean) => void
 }
 type responseType = {
     items: Array<responseItemType>
@@ -34,31 +43,42 @@ type usersPhotosStateType = {
     small: string
     large: string
 }
+
 class UsersContainer extends React.Component<usersPropsType, {}> {
     componentDidMount() {
+        this.props.toggleIsFetching(true)
         axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
     }
 
-    onPageChanged=(pageNumber:number)=>{
+    onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
+        this.props.toggleIsFetching(true)
         axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
     }
 
     render() {
-        return <Users
-            totalUsersCount={this.props.totalUsersCount}
-            pageSize={this.props.pageSize}
-            currentPage={this.props.currentPage}
-            onPageChanged={this.onPageChanged}
-            users={this.props.users}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
-        />
+        return (
+            <>
+                {this.props.isFetching ? <Preloader/> : null}
+
+                <Users
+                    totalUsersCount={this.props.totalUsersCount}
+                    pageSize={this.props.pageSize}
+                    currentPage={this.props.currentPage}
+                    onPageChanged={this.onPageChanged}
+                    users={this.props.users}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
+                />
+            </>
+        )
     }
 }
 
@@ -67,7 +87,8 @@ let mapStateToProps = (state: stateType) => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch) => {
@@ -81,11 +102,14 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         unfollow: (usersID: number) => {
             dispatch(followAC(usersID))
         },
-        setCurrentPage:(pageNumber:number)=>{
+        setCurrentPage: (pageNumber: number) => {
             dispatch(setCurrentPageAC(pageNumber))
         },
-        setTotalUsersCount:(totalUsersCount:number)=>{
+        setTotalUsersCount: (totalUsersCount: number) => {
             dispatch(setUsersTotalCountAC(totalUsersCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }
