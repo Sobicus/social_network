@@ -19,7 +19,7 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersR
         }
         case FOLLOW: {
             return {
-                ...state, users: state.users.map(el => el.id === action.userID ? el.followed = true : el)
+                ...state, users: state.users.map(el => el.id === action.userID ? {...el, followed: true} : el)
             }
         }
         case UNFOLLOW: {
@@ -28,7 +28,7 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersR
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
-        case "SET-TOTAL-USERS-COUNT":{
+        case SET_TOTAL_USERS_COUNT:{
             return {...state, totalUsersCount:action.totalUsersCount}
         }
         default:
