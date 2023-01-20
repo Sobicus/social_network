@@ -11,7 +11,7 @@ import {
     toggleIsFetchingAC
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
-import { Preloader } from "../common/preloader/Preloader";
+import {Preloader} from "../common/preloader/Preloader";
 
 type usersPropsType = {
     users: Array<usersStateType>
@@ -91,26 +91,12 @@ let mapStateToProps = (state: stateType) => {
         isFetching: state.usersPage.isFetching
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        setUsers: (users: Array<usersStateType>) => {
-            dispatch(setUsersAC(users))
-        },
-        follow: (usersID: number) => {
-            dispatch(followAC(usersID))
-        },
-        unfollow: (usersID: number) => {
-            dispatch(followAC(usersID))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalUsersCount: number) => {
-            dispatch(setUsersTotalCountAC(totalUsersCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+
+export default connect(mapStateToProps, {
+    setUsers: setUsersAC,
+    follow: followAC,
+    unfollow: followAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setUsersTotalCountAC,
+    toggleIsFetching: toggleIsFetchingAC
+})(UsersContainer)
