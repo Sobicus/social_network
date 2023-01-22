@@ -2,15 +2,16 @@ import style from "./users.module.css";
 import userPhoto from "../../assets/img/users_avatar.png";
 import React from "react";
 import {usersStateType} from "../../redux/store";
+import {NavLink} from "react-router-dom";
 
 type usersType = {
-    totalUsersCount:number
-pageSize:number
-currentPage:number
-onPageChanged:(pageNumber:number)=>void
-users:Array<usersStateType>
-follow:(userID:number)=>void
-unfollow:(userID:number)=>void
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: Array<usersStateType>
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
 }
 export const Users: React.FC<usersType> = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -33,8 +34,10 @@ export const Users: React.FC<usersType> = (props) => {
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={'/profile/' + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="Avatar"
                              className={style.userPhoto}/>
+                        </NavLink>
                     </div>
                     <div>
                         {

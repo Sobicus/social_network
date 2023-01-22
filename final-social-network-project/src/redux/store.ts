@@ -1,5 +1,5 @@
-import {AddPostACType, profileReducer, UpdateNewPostTextACType} from "./profile-reducer";
-import {dialogsReducer, sendMessageACType, updateNewMessageBodyACType} from "./dialogs-reducer";
+import {AddPostACType, UpdateNewPostTextACType} from "./profile-reducer";
+import {sendMessageACType, updateNewMessageBodyACType} from "./dialogs-reducer";
 
 // export let store: storeType = {
 //     _state: {
@@ -122,6 +122,7 @@ export type stateType = {
 export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
+
 }
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
