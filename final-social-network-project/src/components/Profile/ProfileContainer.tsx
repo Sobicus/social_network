@@ -2,20 +2,26 @@ import React from "react";
 import axios from "axios";
 import {Profile} from "./Profile";
 import connect from "react-redux/es/components/connect";
+import {profileType, stateType} from "../../redux/store";
+import { setUserProfile } from "../../redux/profile-reducer";
 
+type ProfileContainerType={
+
+}
 class ProfileContainer extends React.Component<any, any> {
 
     componentDidMount() {
-        axios.get<profileResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get<profileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
-               this.props.setUserProfile(response.data)
+                this.props.setUserProfile(response.data)
             })
     }
 
     render() {
-        return (<div>
-            <Profile {...this.props}/>
-        </div>)
+        return (
+            <div>
+                <Profile {...this.props}/>
+            </div>)
     }
 }
 
@@ -44,8 +50,8 @@ type photosProfileResponseType = {
     large: string
 }
 
-let mapStateToProps = ()=>{
-    return{}
+let mapStateToProps = (state: stateType) => {
+    profile: state.profilePage.profile
 }
 
-export default connect(mapStateToProps,{setUserProfile}) (ProfileContainer)
+export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)

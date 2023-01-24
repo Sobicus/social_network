@@ -1,4 +1,4 @@
-import {ActionsType, postsDataType, profilePageType} from "./store";
+import {postsDataType, profilePageType, profileType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -16,13 +16,13 @@ let initialState: profilePageType = {
         "aboutMe": "я круто чувак 1001%",
         "contacts": {
             "facebook": "facebook.com",
-            "website": null,
+            "website": "null",
             "vk": "vk.com/dimych",
             "twitter": "https://twitter.com/@sdf",
             "instagram": "instagra.com/sds",
-            "youtube": null,
+            "youtube": "null",
             "github": "github.com",
-            "mainLink": null
+            "mainLink": "null"
         },
         "lookingForAJob": true,
         "lookingForAJobDescription": "не ищу, а дурачусь",
@@ -34,7 +34,7 @@ let initialState: profilePageType = {
         }
     }
 }
-export const profileReducer = (state: profilePageType = initialState, action: ActionsType) => {
+export const profileReducer = (state: profilePageType = initialState, action: actionsProfileReducerType) => {
     switch (action.type) {
         case ADD_POST: {
             const newPost: postsDataType = {
@@ -65,10 +65,13 @@ export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
         newText: text
     } as const
 }
-export const setUserProfile = (profile) => {
+export const setUserProfile = (profile: profileType): setUserProfileType => {
     return {type: SET_USER_PROFILE, profile} as const
 }
-
+export type setUserProfileType = {
+    type: 'SET-USER-PROFILE'
+    profile: profileType
+}
 export type AddPostACType = {
     type: 'ADD-POST'
 }
@@ -76,3 +79,4 @@ export type UpdateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
+export type actionsProfileReducerType = AddPostACType | UpdateNewPostTextACType | setUserProfileType

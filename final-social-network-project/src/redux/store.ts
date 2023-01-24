@@ -162,7 +162,7 @@ type usersPhotosStateType = {
     small: string
     large: string
 }
-type profileType = {
+export type profileType = {
     aboutMe: string
     contacts: profileContactsType
     lookingForAJob: boolean
