@@ -2,16 +2,25 @@ import React from "react";
 import axios from "axios";
 import {Profile} from "./Profile";
 import connect from "react-redux/es/components/connect";
-import {profileType, stateType} from "../../redux/store";
-import { setUserProfile } from "../../redux/profile-reducer";
+import {profileContactsType, ProfileType, stateType, usersPhotosStateType} from "../../redux/store";
+import {setUserProfile} from "../../redux/profile-reducer";
 
-type ProfileContainerType={
-
+type ProfileContainerType = {
+    aboutMe: string
+    contacts: profileContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: usersPhotosStateType
+    setUserProfile: (profile: ProfileType) => void
+    profile: ProfileType
 }
-class ProfileContainer extends React.Component<any, any> {
+
+class ProfileContainer extends React.Component<ProfileContainerType, {}> {
 
     componentDidMount() {
-        axios.get<profileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get<ProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })
@@ -20,7 +29,7 @@ class ProfileContainer extends React.Component<any, any> {
     render() {
         return (
             <div>
-                <Profile {...this.props}/>
+                <Profile /*{...this.props}*/ profile={this.props.profile}/>
             </div>)
     }
 }
@@ -50,8 +59,9 @@ type photosProfileResponseType = {
     large: string
 }
 
-let mapStateToProps = (state: stateType) => {
-    profile: state.profilePage.profile
-}
+let mapStateToProps = (state: stateType) => ({
+        profile: state.profilePage.profile
+    }
+)
 
 export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)

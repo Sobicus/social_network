@@ -1,4 +1,4 @@
-import {postsDataType, profilePageType, profileType} from "./store";
+import {postsDataType, profilePageType, ProfileType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -12,8 +12,8 @@ let initialState: profilePageType = {
         {id: '4', message: 'Test props', likesCounter: 13},
     ],
     newPostText: '',
-    profile: {
-        "aboutMe": "я круто чувак 1001%",
+    profile:{
+        "aboutMe": "я круто чувак 11%",
         "contacts": {
             "facebook": "facebook.com",
             "website": "null",
@@ -65,12 +65,12 @@ export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
         newText: text
     } as const
 }
-export const setUserProfile = (profile: profileType): setUserProfileType => {
+export const setUserProfile = (profile: ProfileType): setUserProfileType => {
     return {type: SET_USER_PROFILE, profile} as const
 }
 export type setUserProfileType = {
     type: 'SET-USER-PROFILE'
-    profile: profileType
+    profile: ProfileType
 }
 export type AddPostACType = {
     type: 'ADD-POST'

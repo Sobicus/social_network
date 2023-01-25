@@ -9,10 +9,11 @@ let rootReducer = combineReducers({
     usersPage: usersReducer
 })
 
-export const store = createStore(rootReducer)
+export let store = createStore(rootReducer)
 
 export type RootStateType = ReturnType<typeof rootReducer>
-
+//@ts-ignore
+window.store = store
 // import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 // import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 // import { dialogsReducer } from './dialogs-reducer';

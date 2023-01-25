@@ -122,7 +122,7 @@ export type stateType = {
 export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
-    profile: profileType
+    profile: ProfileType
 }
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
@@ -158,11 +158,11 @@ export type usersStateType = {
     status: string
     followed: boolean
 }
-type usersPhotosStateType = {
+export type usersPhotosStateType = {
     small: string
     large: string
 }
-export type profileType = {
+export type ProfileType = {
     aboutMe: string
     contacts: profileContactsType
     lookingForAJob: boolean
@@ -171,7 +171,7 @@ export type profileType = {
     userId: number
     photos: usersPhotosStateType
 }
-type profileContactsType = {
+export type profileContactsType = {
     facebook: string
     website: string
     vk: string
