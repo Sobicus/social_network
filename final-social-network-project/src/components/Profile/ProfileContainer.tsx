@@ -6,15 +6,9 @@ import {profileContactsType, ProfileType, stateType, usersPhotosStateType} from 
 import {setUserProfile} from "../../redux/profile-reducer";
 
 type ProfileContainerType = {
-    aboutMe: string
-    contacts: profileContactsType
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: usersPhotosStateType
-    setUserProfile: (profile: ProfileType) => void
     profile: ProfileType
+    setUserProfile:(profile: ProfileType)=>void
+
 }
 
 class ProfileContainer extends React.Component<ProfileContainerType, {}> {
@@ -32,31 +26,6 @@ class ProfileContainer extends React.Component<ProfileContainerType, {}> {
                 <Profile /*{...this.props}*/ profile={this.props.profile}/>
             </div>)
     }
-}
-
-type profileResponseType = {
-    aboutMe: string
-    contacts: contactsProfileResponseType
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: photosProfileResponseType
-
-}
-type contactsProfileResponseType = {
-    facebook: string
-    website: string
-    vk: string
-    twitter: string
-    instagram: string
-    youtube: string
-    github: string
-    mainLink: string
-}
-type photosProfileResponseType = {
-    small: string
-    large: string
 }
 
 let mapStateToProps = (state: stateType) => ({

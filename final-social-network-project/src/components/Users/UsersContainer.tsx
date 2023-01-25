@@ -12,7 +12,7 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 
-type usersPropsType = {
+type UsersPropsType = {
     users: Array<usersStateType>
     pageSize: number
     totalUsersCount: number
@@ -43,7 +43,7 @@ type usersPhotosStateType = {
     large: string
 }
 
-class UsersContainer extends React.Component<usersPropsType, {}> {
+class UsersContainer extends React.Component<UsersPropsType, {}> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
