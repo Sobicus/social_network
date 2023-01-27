@@ -12,7 +12,8 @@ let initialState: profilePageType = {
         {id: '4', message: 'Test props', likesCounter: 13},
     ],
     newPostText: '',
-    profile: {
+    profile:
+    {
         "aboutMe": "я круто чувак 11%",
         "contacts": {
             "facebook": "facebook.com",
