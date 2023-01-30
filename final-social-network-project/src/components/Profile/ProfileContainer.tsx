@@ -18,6 +18,7 @@ export function withRouter<T>(Children: ComponentType<T>) {
         return <Children {...newProps}/>
     }
 }
+
 type ProfileParamsType = {
     userId: string
 }

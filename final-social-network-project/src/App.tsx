@@ -9,16 +9,18 @@ import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from "./components/Users/UsersContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type AppType = {}
 
 const App: React.FC<AppType> = (props) => {
     return (
         <div className='app_wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <div className='app_wrapper_content'>
                 <Routes>
+                    <Route path='*' element={<ProfileContainer/>}/>
                     <Route path='/profile/' element={<ProfileContainer/>}/>
                     <Route path='/profile/:userId' element={<ProfileContainer/>}/>
                     <Route
