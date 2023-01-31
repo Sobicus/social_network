@@ -1,4 +1,4 @@
-import {usersPageType, usersStateType} from "./store";
+import {usersPageType, usersPhotosStateType, usersStateType} from "./store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -8,7 +8,19 @@ const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 
 let initialState: usersPageType = {
-    users: [],
+    users: [
+        // {
+        //     name: "string",
+        //     id: 2,
+        //     uniqueUrlName: "string",
+        //     photos: {
+        //         small: "string",
+        //         large: "string"
+        //     },
+        //     status: "string",
+        //     followed: true,
+        // }
+    ],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
@@ -30,11 +42,11 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersR
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
-        case SET_TOTAL_USERS_COUNT:{
-            return {...state, totalUsersCount:action.totalUsersCount}
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
         }
-        case TOGGLE_IS_FETCHING:{
-            return {...state, isFetching:action.isFetching}
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return state
@@ -61,8 +73,8 @@ export const setCurrentPageAC = (currentPage: number) => {
 export const setUsersTotalCountAC = (totalUsersCount: number) => {
     return {type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const
 }
-export const toggleIsFetchingAC = (isFetching:boolean)=>{
-    return {type:TOGGLE_IS_FETCHING,isFetching} as const
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {type: TOGGLE_IS_FETCHING, isFetching} as const
 }
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
 type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
