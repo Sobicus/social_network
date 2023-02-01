@@ -70,14 +70,14 @@ export const unfollowAC = (userID: number) => {
 export const setCurrentPageAC = (currentPage: number) => {
     return {type: SET_CURRENT_PAGE, currentPage} as const
 }
-export const setUsersTotalCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
     return {type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const
 }
 export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const
 }
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
-type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
+type setUsersTotalCountACType = ReturnType<typeof setTotalUsersCountAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>

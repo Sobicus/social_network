@@ -6,8 +6,8 @@ import {
     followAC,
     setCurrentPageAC,
     setUsersAC,
-    setUsersTotalCountAC,
-    toggleIsFetchingAC
+    setTotalUsersCountAC,
+    toggleIsFetchingAC, unfollowAC
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
@@ -95,8 +95,8 @@ let mapStateToProps = (state: RootStateType) => {
 export default connect(mapStateToProps, {
     setUsers: setUsersAC,
     follow: followAC,
-    unfollow: followAC,
+    unfollow: unfollowAC,
     setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount: setUsersTotalCountAC,
+    setTotalUsersCount: setTotalUsersCountAC,
     toggleIsFetching: toggleIsFetchingAC
 })(UsersContainer)
