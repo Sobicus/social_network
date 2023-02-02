@@ -149,6 +149,7 @@ export type usersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 export type usersStateType = {
     name: string

@@ -6,6 +6,7 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS'
 
 let initialState: usersPageType = {
     users: [
@@ -25,6 +26,7 @@ let initialState: usersPageType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
+    followingInProgress: []
 }
 export const usersReducer = (state: usersPageType = initialState, action: UsersReducerActionType) => {
     switch (action.type) {
@@ -47,6 +49,14 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersR
         }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
+        }
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
         }
         default:
             return state
@@ -76,6 +86,10 @@ export const setTotalUsersCountAC = (totalUsersCount: number) => {
 export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const
 }
+export const toggleFollowingProgressAC = (isFetching: boolean, userId:number) => {
+    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const
+}
+type toggleFollowingProgressACType = ReturnType<typeof toggleFollowingProgressAC>
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
 type setUsersTotalCountACType = ReturnType<typeof setTotalUsersCountAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
@@ -87,4 +101,5 @@ export type UsersReducerActionType = FollowACType |
     setUsersACType |
     setCurrentPageACType |
     setUsersTotalCountACType |
-    toggleIsFetchingACType
+    toggleIsFetchingACType |
+    toggleFollowingProgressACType
