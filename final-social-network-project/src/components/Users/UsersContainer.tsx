@@ -11,7 +11,7 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
 import {RootStateType} from "../../redux/redux-store";
-import { usersAPI} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: Array<usersStateType>
@@ -26,6 +26,7 @@ type UsersPropsType = {
     isFetching: boolean
     toggleIsFetching: (isFetching: boolean) => void
 }
+
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
@@ -41,7 +42,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
         // axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
-            usersAPI.getUsers(pageNumber,this.props.pageSize).then(data => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(data.items)
         })

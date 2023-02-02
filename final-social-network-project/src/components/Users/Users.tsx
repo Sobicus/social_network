@@ -3,7 +3,7 @@ import userPhoto from "../../assets/img/users_avatar.png";
 import React from "react";
 import {usersStateType} from "../../redux/store";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type usersType = {
     totalUsersCount: number
@@ -45,24 +45,24 @@ export const Users: React.FC<usersType> = (props) => {
                         {
                             !u.followed
                                 ? <button onClick={() => {
-                                    axios.post<FollowUnfollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {"API-KEY":"978ec9e4-88e0-4331-b5bc-a8ba69be02cb"}
-                                    })
+                                    // axios.post<FollowUnfollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                    //     withCredentials: true,
+                                    //     headers: {"API-KEY":"978ec9e4-88e0-4331-b5bc-a8ba69be02cb"}
+                                    // })
+                                usersAPI.followUser(u.id)
                                         .then(res => {
-                                            console.log(res)
                                             if (res.data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
                                         })
                                 }}>Follow</button>
                                 : <button onClick={() => {
-                                    axios.delete<FollowUnfollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                        withCredentials: true,
-                                        headers: {"API-KEY":"978ec9e4-88e0-4331-b5bc-a8ba69be02cb"}
-                                    })
+                                    // axios.delete<FollowUnfollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                    //     withCredentials: true,
+                                    //     headers: {"API-KEY":"978ec9e4-88e0-4331-b5bc-a8ba69be02cb"}
+                                    // })
+                                usersAPI.unfollowUser(u.id)
                                         .then(res => {
-                                            console.log(res)
                                             if (res.data.resultCode === 0) {
                                                 props.unfollow(u.id)
                                             }
@@ -85,9 +85,4 @@ export const Users: React.FC<usersType> = (props) => {
 
         </div>
     )
-}
-type FollowUnfollowType={
-    resultCode: number
-    messages: Array<string>
-    data: {}
 }
