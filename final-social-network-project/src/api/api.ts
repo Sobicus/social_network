@@ -9,22 +9,27 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get<responseType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
+        return instance.get<responseUsersType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
     },
-    followUser(userId:number){
+    followUser(userId: number) {
         return instance.post<FollowUnfollowType>(`follow/${userId}`)
     },
-    unfollowUser(userId:number){
+    unfollowUser(userId: number) {
         return instance.delete<FollowUnfollowType>(`follow/${userId}`)
     }
 }
-export const profileAPI={
-    getProfile(userId:number){
+export const profileAPI = {
+    getProfile(userId: number) {
         return instance.get<ProfileType>(`profile/${userId}`)
     }
 }
+export const authAPI = {
+    authMe() {
+        return instance.get<responseAuthType>('auth/me')
+    }
+}
 
-type responseType = {
+type responseUsersType = {
     items: Array<responseItemType>
     totalCount: number
     error: string
@@ -41,8 +46,19 @@ type usersPhotosStateType = {
     small: string
     large: string
 }
-type FollowUnfollowType={
+type FollowUnfollowType = {
     resultCode: number
     messages: Array<string>
     data: {}
+}
+type responseAuthType = {
+    data: responseDataType
+    resultCode: number
+    messages: Array<string>
+
+}
+type responseDataType = {
+    id: number
+    email: string
+    login: string
 }
