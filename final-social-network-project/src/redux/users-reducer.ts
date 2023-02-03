@@ -1,4 +1,6 @@
-import {usersPageType, usersPhotosStateType, usersStateType} from "./store";
+import {usersPageType, usersStateType} from "./store";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -89,6 +91,38 @@ export const toggleIsFetchingAC = (isFetching: boolean) => {
 export const toggleFollowingProgressAC = (isFetching: boolean, userId:number) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const
 }
+
+export const getUsersTC=(currentPage:number,pageSize:number)=>(dispatch:Dispatch)=>{
+    dispatch(toggleIsFetchingAC(true))
+    // axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials:true})
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPageAC(currentPage))
+        dispatch(toggleIsFetchingAC(false))
+        dispatch(setUsersAC(data.items))
+        dispatch(setTotalUsersCountAC(data.totalCount))
+    })
+}
+export const followTC=(userId:number)=>(dispatch:Dispatch)=>{
+    dispatch(toggleFollowingProgressAC(true, userId))
+    usersAPI.followUser(userId)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(followAC(userId))
+            }
+            dispatch(toggleFollowingProgressAC(false, userId))
+        })
+}
+export const unfollowTC=(userId:number)=>(dispatch:Dispatch)=>{
+    dispatch(toggleFollowingProgressAC(true, userId))
+    usersAPI.unfollowUser(userId)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(unfollowAC(userId))
+            }
+            dispatch(toggleFollowingProgressAC(false, userId))
+        })
+}
+
 type toggleFollowingProgressACType = ReturnType<typeof toggleFollowingProgressAC>
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
 type setUsersTotalCountACType = ReturnType<typeof setTotalUsersCountAC>
