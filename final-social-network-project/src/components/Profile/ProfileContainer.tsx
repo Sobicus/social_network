@@ -2,13 +2,15 @@ import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import connect from "react-redux/es/components/connect";
 import {ProfileType, stateType} from "../../redux/store";
-import { setUserProfileTC} from "../../redux/profile-reducer";
-import {useParams} from "react-router-dom";
+import {setUserProfileTC} from "../../redux/profile-reducer";
+import {Navigate, useParams} from "react-router-dom";
+import {RootStateType} from "../../redux/redux-store";
 
 type ProfileContainerType<T = undefined> = {
     profile: ProfileType
-    setUserProfile: (userId:number) => void
+    setUserProfile: (userId: number) => void
     match?: T
+    isAuth: boolean
 }
 
 export function withRouter<T>(Children: ComponentType<T>) {
@@ -27,8 +29,8 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
 
     componentDidMount() {
         let userId = this.props.match?.userId
-        if(!userId){
-            userId=2
+        if (!userId) {
+            userId = 2
         }
         this.props.setUserProfile(userId)
         // profileAPI.getProfile(userId!)
@@ -38,6 +40,8 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
     }
 
     render() {
+        if (!this.props.isAuth) return <Navigate to={'/login'}/>
+
         return (
             <div>
                 <Profile /*{...this.props}*/ profile={this.props.profile}/>
@@ -45,8 +49,9 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
     }
 }
 
-let mapStateToProps = (state: stateType) => ({
-        profile: state.profilePage.profile
+let mapStateToProps = (state: RootStateType) => ({
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth
     }
 )
 export default withRouter(connect(mapStateToProps, {setUserProfile: setUserProfileTC})(ProfileContainer))
