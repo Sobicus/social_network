@@ -34,10 +34,7 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
             userId = 2
         }
         this.props.setUserProfile(userId)
-        // profileAPI.getProfile(userId!)
-        // .then(response => {
-        //     this.props.setUserProfile(response.data)
-        // })
+
     }
 
     render() {
@@ -45,7 +42,7 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
 
         return (
             <div>
-                <Profile /*{...this.props}*/ profile={this.props.profile}/>
+                <Profile profile={this.props.profile}/>
             </div>)
     }
 }

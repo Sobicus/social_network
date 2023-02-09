@@ -27,9 +27,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
         props.updateNewMessageBody(body)
     }
 
-    if (!props.isAuth) return <Navigate to={'/login'}/>
-
-
     return (
         <div className={style.dialogs}>
             <div className={style.dialogs_items}>
