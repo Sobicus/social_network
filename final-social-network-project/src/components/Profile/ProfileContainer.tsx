@@ -11,7 +11,7 @@ type ProfileContainerType<T = undefined> = {
     profile: ProfileType
     setUserProfile: (userId: number) => void
     match?: T
-    isAuth: boolean
+    /*isAuth: boolean*/
 }
 
 export function withRouter<T>(Children: ComponentType<T>) {
@@ -38,7 +38,7 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
     }
 
     render() {
-        if (!this.props.isAuth) return <Navigate to={'/login'}/>
+        /*if (!this.props.isAuth) return <Navigate to={'/login'}/>*/
 
         return (
             <div>
@@ -48,7 +48,7 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
 }
 let mapStateToProps = (state: RootStateType) => ({
         profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth
+        /*isAuth: state.auth.isAuth*/
     }
 )
 export default withAuthRedirect(withRouter(connect(mapStateToProps, {setUserProfile: setUserProfileTC})(ProfileContainer)))
