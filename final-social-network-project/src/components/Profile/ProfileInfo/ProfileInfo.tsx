@@ -2,6 +2,7 @@ import React from "react";
 import style from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/store";
 import {Preloader} from "../../common/preloader/Preloader";
+import { ProfileStatus } from "./ProfileStatus";
 
 type profileInfoType = {
     profile: ProfileType
@@ -19,20 +20,22 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
             </div>
             <div className={style.description_block} style={{margin:10}}>
                 <img src={props.profile.photos.large} alt="Photo large" style={{borderRadius: 500, margin:5}}/>
-                {props.profile.userId}
-                {props.profile.fullName}
-                {props.profile.aboutMe}
-                {props.profile.lookingForAJob}
-                {props.profile.lookingForAJobDescription}
-                {props.profile.contacts.youtube}
-                {props.profile.contacts.website}
-                {props.profile.contacts.vk}
-                {props.profile.contacts.mainLink}
-                {props.profile.contacts.twitter}
-                {props.profile.contacts.instagram}
-                {props.profile.contacts.github}
-                {props.profile.contacts.facebook}
-                ava + description
+                <ProfileStatus status={'Hello my dear friend'}/>
+                <br/><hr/>
+                {props.profile.userId}<br/><hr/>
+                {props.profile.fullName}<br/><hr/>
+                {props.profile.aboutMe}<br/><hr/>
+                {props.profile.lookingForAJob}<br/><hr/>
+                {props.profile.lookingForAJobDescription}<br/><hr/>
+                {props.profile.contacts.youtube}<br/><hr/>
+                {props.profile.contacts.website}<br/><hr/>
+                {props.profile.contacts.vk}<br/><hr/>
+                {props.profile.contacts.mainLink}<br/><hr/>
+                {props.profile.contacts.twitter}<br/><hr/>
+                {props.profile.contacts.instagram}<br/><hr/>
+                {props.profile.contacts.github}<br/><hr/>
+                {props.profile.contacts.facebook}<br/><hr/>
+                ava + description <hr/>
 
             </div>
         </div>
