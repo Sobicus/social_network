@@ -14,15 +14,6 @@ type HeaderContainerType = {
 
 class HeaderContainer extends React.Component<HeaderContainerType> {
     componentDidMount() {
-        // axios.get<responseAuthType>('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
-        // authAPI.authMe()
-        //     .then(res => {
-        //         if (res.data.resultCode === 0) {
-        //             let {id, login, email} = res.data.data
-        //             this.props.setAuthUserData(id, login, email)
-        //         }
-        //     })
-
         this.props.setAuthUserData()
     }
 

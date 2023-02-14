@@ -6,6 +6,7 @@ import {setUserProfileTC} from "../../redux/profile-reducer";
 import {Navigate, useParams} from "react-router-dom";
 import {RootStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type ProfileContainerType<T = undefined> = {
     profile: ProfileType
@@ -14,11 +15,11 @@ type ProfileContainerType<T = undefined> = {
     /*isAuth: boolean*/
 }
 
-export function withRouter<T>(Children: ComponentType<T>) {
+export function withRouter<T>(Component: ComponentType<T>) {
     return function (props: T) {
         const match = useParams();
         const newProps = {...props, match}
-        return <Children {...newProps}/>
+        return <Component {...newProps}/>
     }
 }
 
@@ -51,4 +52,7 @@ let mapStateToProps = (state: RootStateType) => ({
         /*isAuth: state.auth.isAuth*/
     }
 )
-export default withAuthRedirect(withRouter(connect(mapStateToProps, {setUserProfile: setUserProfileTC})(ProfileContainer)))
+export default compose<React.ComponentType>(connect(mapStateToProps, {setUserProfile: setUserProfileTC}),withRouter,withAuthRedirect)(ProfileContainer)
+
+// let ProfileContainerWithAuthRedirect =withAuthRedirect(ProfileContainer)
+// export default withAuthRedirect(withRouter(connect(mapStateToProps, {setUserProfile: setUserProfileTC})(ProfileContainerWithAuthRedirect)))

@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
 import {usersStateType} from "../../redux/store";
 import {
     followTC,
@@ -17,17 +18,17 @@ type UsersPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress:Array<number>
+    followingInProgress: Array<number>
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setCurrentPage: (pageNumber: number) => void
-    toggleFollowingProgress:(isFetching:boolean, userId:number)=>void
-    getUsers:(currentPage:number, pageSize:number)=>void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage,this.props.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
@@ -55,6 +56,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
+
+
 let mapStateToProps = (state: RootStateType) => {
     return {
         users: state.usersPage.users,
@@ -66,10 +69,20 @@ let mapStateToProps = (state: RootStateType) => {
     }
 }
 
-export default connect(mapStateToProps, {
+export default compose<React.ComponentType>(connect(mapStateToProps, {
     follow: followTC,
     unfollow: unfollowTC,
     setCurrentPage: setCurrentPageAC,
     toggleFollowingProgress: toggleFollowingProgressAC,
-    getUsers:getUsersTC
-})(withAuthRedirect(UsersContainer))
+    getUsers: getUsersTC
+}),withAuthRedirect)(UsersContainer)
+
+// let UsersContainerWithAuthRedirect = withAuthRedirect(UsersContainer)
+//
+// export default connect(mapStateToProps, {
+//     follow: followTC,
+//     unfollow: unfollowTC,
+//     setCurrentPage: setCurrentPageAC,
+//     toggleFollowingProgress: toggleFollowingProgressAC,
+//     getUsers: getUsersTC
+// })(UsersContainerWithAuthRedirect)
