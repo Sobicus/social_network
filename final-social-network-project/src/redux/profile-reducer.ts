@@ -1,10 +1,11 @@
-import { Dispatch } from "redux";
+import {Dispatch} from "redux";
 import {postsDataType, profilePageType, ProfileType} from "./store";
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_STATUS = 'SET-STATUS';
 
 let initialState: profilePageType = {
     postsData: [
@@ -15,27 +16,28 @@ let initialState: profilePageType = {
     ],
     newPostText: '',
     profile:
-    {
-        "aboutMe": "я круто чувак 11%",
-        "contacts": {
-            "facebook": "facebook.com",
-            "website": "null",
-            "vk": "vk.com/dimych",
-            "twitter": "https://twitter.com/@sdf",
-            "instagram": "instagra.com/sds",
-            "youtube": "null",
-            "github": "github.com",
-            "mainLink": "null"
+        {
+            "aboutMe": "я круто чувак 11%",
+            "contacts": {
+                "facebook": "facebook.com",
+                "website": "null",
+                "vk": "vk.com/dimych",
+                "twitter": "https://twitter.com/@sdf",
+                "instagram": "instagra.com/sds",
+                "youtube": "null",
+                "github": "github.com",
+                "mainLink": "null"
+            },
+            "lookingForAJob": true,
+            "lookingForAJobDescription": "не ищу, а дурачусь",
+            "fullName": "samurai dimych",
+            "userId": 2,
+            "photos": {
+                "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+                "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+            }
         },
-        "lookingForAJob": true,
-        "lookingForAJobDescription": "не ищу, а дурачусь",
-        "fullName": "samurai dimych",
-        "userId": 2,
-        "photos": {
-            "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-            "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-        }
-    }
+    status: 'Field for status'
 }
 export const profileReducer = (state: profilePageType = initialState, action: actionsProfileReducerType) => {
     switch (action.type) {
@@ -52,6 +54,9 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
+        }
+        case SET_STATUS: {
+            return {...state, status: action.status}
         }
         default:
             return state
@@ -71,13 +76,31 @@ export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
 export const setUserProfileAC = (profile: ProfileType): setUserProfileType => {
     return {type: SET_USER_PROFILE, profile} as const
 }
-export const setUserProfileTC=(userId:number)=>(dispatch:Dispatch)=>{
+export const setStatusProfileAC = (status: string): setStatusProfileACType => {
+    return {type: SET_STATUS, status} as const
+}
+export const getStatusProfileTC = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getStatusProfile(userId).then(response => {
+        dispatch(setStatusProfileAC(response.data))
+    })
+}
+export const updateStatusProfileTC = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatusProfile(status).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setStatusProfileAC(status))
+        }
+    })
+}
+export const setUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data))
         })
 }
-
+export type setStatusProfileACType = {
+    type: 'SET-STATUS'
+    status: string
+}
 export type setUserProfileType = {
     type: 'SET-USER-PROFILE'
     profile: ProfileType
@@ -89,4 +112,8 @@ export type UpdateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type actionsProfileReducerType = AddPostACType | UpdateNewPostTextACType | setUserProfileType
+export type actionsProfileReducerType =
+    AddPostACType
+    | UpdateNewPostTextACType
+    | setUserProfileType
+    | setStatusProfileACType

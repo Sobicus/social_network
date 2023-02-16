@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
@@ -15,6 +14,7 @@ import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 type AppType = {}
 
 const App: React.FC<AppType> = (props) => {
+
     return (
         <div className='app_wrapper'>
             <HeaderContainer/>
@@ -40,3 +40,7 @@ const App: React.FC<AppType> = (props) => {
 }
 
 export default App;
+function Dispatch(arg0: (dispatch: import("redux").Dispatch<import("redux").AnyAction>) => void) {
+    throw new Error('Function not implemented.');
+}
+

@@ -4,7 +4,7 @@ import {Dispatch} from "redux";
 const SET_USER_DATA = 'SET-USER-DATA'
 
 const initialAuthState: initialAuthStateType = {
-    userId: 1,
+    userId: 24027,
     login: "S",
     email: "Test",
     isAuth: false
@@ -30,7 +30,7 @@ export const authReducer = (state: initialAuthStateType = initialAuthState, acti
 export const setUserDataAC = (userId: number, login: string, email: string) => {
     return {type: SET_USER_DATA, data: {userId, login, email}} as const
 }
-export const authMeTC=()=>(dispatch:Dispatch)=>{
+export const authMeTC = () => (dispatch: Dispatch) => {
     authAPI.authMe()
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -40,6 +40,6 @@ export const authMeTC=()=>(dispatch:Dispatch)=>{
         })
 }
 
-    type setUserDataACType = ReturnType<typeof setUserDataAC>
+type setUserDataACType = ReturnType<typeof setUserDataAC>
 
 type authReducerType = setUserDataACType

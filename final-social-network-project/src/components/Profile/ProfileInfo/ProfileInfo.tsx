@@ -6,6 +6,8 @@ import { ProfileStatus } from "./ProfileStatus";
 
 type profileInfoType = {
     profile: ProfileType
+    status:string
+    updateStatus:(status:string)=>void
 }
 export const ProfileInfo: React.FC<profileInfoType> = (props) => {
     if (!props.profile) {
@@ -20,22 +22,9 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
             </div>
             <div className={style.description_block} style={{margin:10}}>
                 <img src={props.profile.photos.large} alt="Photo large" style={{borderRadius: 500, margin:5}}/>
-                <ProfileStatus status={'Hello my dear friend'}/>
-                <br/><hr/>
-                {props.profile.userId}<br/><hr/>
-                {props.profile.fullName}<br/><hr/>
-                {props.profile.aboutMe}<br/><hr/>
-                {props.profile.lookingForAJob}<br/><hr/>
-                {props.profile.lookingForAJobDescription}<br/><hr/>
-                {props.profile.contacts.youtube}<br/><hr/>
-                {props.profile.contacts.website}<br/><hr/>
-                {props.profile.contacts.vk}<br/><hr/>
-                {props.profile.contacts.mainLink}<br/><hr/>
-                {props.profile.contacts.twitter}<br/><hr/>
-                {props.profile.contacts.instagram}<br/><hr/>
-                {props.profile.contacts.github}<br/><hr/>
-                {props.profile.contacts.facebook}<br/><hr/>
-                ava + description <hr/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+
+
 
             </div>
         </div>

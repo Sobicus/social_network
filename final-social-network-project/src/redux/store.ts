@@ -123,6 +123,7 @@ export type profilePageType = {
     postsData: Array<postsDataType>
     newPostText: string
     profile: ProfileType
+    status:string
 }
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>

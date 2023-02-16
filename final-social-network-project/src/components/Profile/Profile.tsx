@@ -5,12 +5,14 @@ import {ProfileType} from "../../redux/store";
 
 type profileComponentType = {
     profile: ProfileType
+    status:string
+    updateStatus:(status:string)=>void
 }
 
 export const Profile: React.FC<profileComponentType> = (props) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     )
