@@ -3,7 +3,6 @@ import style from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {dialogsPageType} from '../../redux/store';
-import {Navigate, redirect} from "react-router-dom";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void
