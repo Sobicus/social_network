@@ -29,7 +29,7 @@ const LoginForm = () => {
 type LoginFormikType = {
     email: string
     password: string
-    /* rememberMe: boolean*/
+    rememberMe: boolean
 }
 const SignupForm = () => {
     const formik = useFormik({
