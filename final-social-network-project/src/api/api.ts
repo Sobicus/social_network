@@ -32,9 +32,16 @@ export const profileAPI = {
 export const authAPI = {
     authMe() {
         return instance.get<responseAuthType>('auth/me')
+    },
+    login(model:modelType){
+        return instance.post('auth/login', {model})
     }
 }
-
+export type modelType={
+    email: string
+    password: string
+    rememberMe: boolean
+}
 type responseUsersType = {
     items: Array<responseItemType>
     totalCount: number

@@ -1,4 +1,4 @@
-import {authAPI} from "../api/api";
+import {authAPI, modelType} from "../api/api";
 import {Dispatch} from "redux";
 
 const SET_USER_DATA = 'SET-USER-DATA'
@@ -38,6 +38,15 @@ export const authMeTC = () => (dispatch: Dispatch) => {
                 dispatch(setUserDataAC(id, login, email))
             }
         })
+}
+
+export const loginTC = (model: modelType) => (dispatch: Dispatch) => {
+    authAPI.login(model)
+        .then(response => {
+        if (response.data.resultCode === 0) {
+            console.log(response)
+        }
+    })
 }
 
 type setUserDataACType = ReturnType<typeof setUserDataAC>
