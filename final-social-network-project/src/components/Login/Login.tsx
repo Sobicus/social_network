@@ -1,13 +1,20 @@
-import {Field, Formik, useFormik} from "formik";
+import {useFormik} from "formik";
 import {loginTC} from "../../redux/auth-reducer";
+import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
+import {Navigate} from "react-router-dom";
+
 
 export const Login = () => {
-    return (
-        <div>
-            <h1>LOGIN</h1>
-            <SignupForm/>
-        </div>
-    )
+    const authMe = useAppSelector(state => state.auth.isAuth)
+    if (authMe) {
+        return <Navigate to={'/profile'}/>
+    }
+        return (
+            <div>
+                <h1>LOGIN</h1>
+                <SignupForm/>
+            </div>
+        )
 }
 const LoginForm = () => {
     return (
@@ -32,8 +39,8 @@ type LoginFormikType = {
     password: string
     rememberMe: boolean
 }
-
 const SignupForm = () => {
+    const dispatch = useAppDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -57,7 +64,7 @@ const SignupForm = () => {
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
-            loginTC(values)
+            dispatch(loginTC(values.email, values.password, values.rememberMe))
         },
     });
     return (
@@ -65,23 +72,30 @@ const SignupForm = () => {
             <label htmlFor="email">Email Address</label>
             <input
                 id="email"
-                name="email"
                 type="email"
+                {...formik.getFieldProps('email')}
+                /*
+                name="email"
                 placeholder="Email Address"
+                onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.email}
+                */
             />
-            {formik.touched.email && formik.errors.email ? <div style={{color:'red'}}>{formik.errors.email}</div> : null}
+            {formik.touched.email && formik.errors.email ?
+                <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
             <label htmlFor="email">Password</label>
             <input
                 id="password"
                 name="password"
                 type="password"
                 placeholder="password"
+                onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.password}
             />
-            {formik.touched.password && formik.errors.password ? <div style={{color:'red'}}>{formik.errors.password}</div> : null}
+            {formik.touched.password && formik.errors.password ?
+                <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
             <input
                 type="checkbox"
                 id="rememberMe"

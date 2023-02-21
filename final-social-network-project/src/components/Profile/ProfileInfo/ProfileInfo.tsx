@@ -23,9 +23,6 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
             <div className={style.description_block} style={{margin:10}}>
                 <img src={props.profile.photos.large} alt="Photo large" style={{borderRadius: 500, margin:5}}/>
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
-
-
-
             </div>
         </div>
     )

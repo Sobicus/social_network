@@ -33,8 +33,11 @@ export const authAPI = {
     authMe() {
         return instance.get<responseAuthType>('auth/me')
     },
-    login(model:modelType){
-        return instance.post('auth/login', {model})
+    login(email:string, password:string, rememberMe:boolean = false){
+        return instance.post('auth/login', {email,password, rememberMe})
+    },
+    logout(){
+        return instance.delete('auth/login')
     }
 }
 export type modelType={

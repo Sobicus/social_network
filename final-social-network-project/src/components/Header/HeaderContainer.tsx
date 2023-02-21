@@ -1,7 +1,7 @@
 import React from "react";
 import {Header} from "./Header";
 import connect from "react-redux/es/components/connect";
-import {authMeTC} from "../../redux/auth-reducer";
+import {authMeTC, logoutTC} from "../../redux/auth-reducer";
 import {RootStateType} from "../../redux/redux-store";
 
 
@@ -9,6 +9,7 @@ type HeaderContainerType = {
     setAuthUserData: () => void
     isAuth: boolean
     login: string
+    logout:()=>void
 }
 
 
@@ -28,4 +29,4 @@ const mapStateToProps = (state: RootStateType) => {
         login: state.auth.login
     }
 }
-export default connect(mapStateToProps, {setAuthUserData: authMeTC})(HeaderContainer)
+export default connect(mapStateToProps, {setAuthUserData: authMeTC, logout:logoutTC})(HeaderContainer)
