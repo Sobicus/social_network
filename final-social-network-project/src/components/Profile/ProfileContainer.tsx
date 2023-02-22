@@ -20,6 +20,7 @@ type ProfileContainerType<T = undefined> = {
     getUserStatus: (userId: number) => void
     updateStatus: (status: string) => void
     id: number
+    isAuth:boolean
 }
 export function withRouter<T>(Component: ComponentType<T>) {
     return function (props: T) {
@@ -58,7 +59,8 @@ let mapStateToProps = (state: RootStateType) => ({
         profile: state.profilePage.profile,
         /*isAuth: state.auth.isAuth*/
         status: state.profilePage.status,
-        id: state.auth.userId
+        id: state.auth.userId,
+        isAuth:state.auth.isAuth
     }
 )
 export default compose<React.ComponentType>(connect(mapStateToProps, {

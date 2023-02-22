@@ -67,7 +67,8 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
                 dispatch(errorMessageAC(''))
             }
             if(response.data.resultCode===1){
-                dispatch(errorMessageAC(response.data.messages[0]))
+                let errorMesage = response.data.messages.length>0?response.data.messages[0]:'Some error'
+                dispatch(errorMessageAC(errorMesage))
             }
         })
 }

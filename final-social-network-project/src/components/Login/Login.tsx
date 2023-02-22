@@ -79,7 +79,7 @@ const SignupForm = () => {
                 <div style={{color: 'red'}}>{formik.errors.password}</div>
                 : null
             }
-            {errorMessage.length > 0 ? <div>{errorMessage}</div> : ''}
+            {errorMessage.length > 0 ? <div style={{color:'red', background:"orange"}}>{errorMessage}</div> : ''}
             <input
                 type="checkbox"
                 id="rememberMe"
