@@ -22,10 +22,10 @@ export const profileAPI = {
     getProfile(userId: number) {
         return instance.get<ProfileType>(`profile/${userId}`)
     },
-    getStatusProfile(userId:number ){
+    getStatusProfile(userId: number) {
         return instance.get<string>(`profile/status/${userId}`)
     },
-    updateStatusProfile(status:string){
+    updateStatusProfile(status: string) {
         return instance.put('profile/status', {status: status})
     }
 }
@@ -33,14 +33,21 @@ export const authAPI = {
     authMe() {
         return instance.get<responseAuthType>('auth/me')
     },
-    login(email:string, password:string, rememberMe:boolean = false){
-        return instance.post('auth/login', {email,password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post<responseLoginType>('auth/login', {email, password, rememberMe})
     },
-    logout(){
+    logout() {
         return instance.delete('auth/login')
     }
 }
-export type modelType={
+type responseLoginType = {
+    resultCode: number
+    messages: Array<string>
+    data: {
+        userId: number
+    }
+}
+export type modelType = {
     email: string
     password: string
     rememberMe: boolean

@@ -21,7 +21,6 @@ type ProfileContainerType<T = undefined> = {
     updateStatus: (status: string) => void
     id: number
 }
-
 export function withRouter<T>(Component: ComponentType<T>) {
     return function (props: T) {
         const match = useParams();
@@ -29,11 +28,9 @@ export function withRouter<T>(Component: ComponentType<T>) {
         return <Component {...newProps}/>
     }
 }
-
 type ProfileParamsType = {
     userId: number
 }
-
 class ProfileContainer extends React.Component<ProfileContainerType<ProfileParamsType>> {
 
     componentDidMount() {

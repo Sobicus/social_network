@@ -9,38 +9,19 @@ export const Login = () => {
     if (authMe) {
         return <Navigate to={'/profile'}/>
     }
-        return (
-            <div>
-                <h1>LOGIN</h1>
-                <SignupForm/>
-            </div>
-        )
-}
-const LoginForm = () => {
     return (
-        <form action="">
-            <div>
-                <input placeholder={"Login"}/>
-            </div>
-            <div>
-                <input placeholder={"Password"}/>
-            </div>
-            <div>
-                <input type={"checkbox"}/> Remember me
-            </div>
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
+        <div>
+            <h1>LOGIN</h1>
+            <SignupForm/>
+        </div>
     )
 }
-type LoginFormikType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
+
+
 const SignupForm = () => {
     const dispatch = useAppDispatch()
+    const errorMessage = useAppSelector(state => state.auth.errorMessage)
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -95,7 +76,10 @@ const SignupForm = () => {
                 value={formik.values.password}
             />
             {formik.touched.password && formik.errors.password ?
-                <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                <div style={{color: 'red'}}>{formik.errors.password}</div>
+                : null
+            }
+            {errorMessage.length > 0 ? <div>{errorMessage}</div> : ''}
             <input
                 type="checkbox"
                 id="rememberMe"
@@ -112,4 +96,9 @@ type loginErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
+}
+type LoginFormikType = {
+    email: string
+    password: string
+    rememberMe: boolean
 }

@@ -3,12 +3,14 @@ import {Dispatch} from "redux";
 import {AppDispatch} from "./redux-store";
 
 const SET_USER_DATA = 'SET-USER-DATA'
+const ERROR_MESSAGE = 'ERROR-MESSAGE'
 
 const initialAuthState: initialAuthStateType = {
     userId: 1,
     login: "",
     email: "",
-    isAuth: false
+    isAuth: false,
+    errorMessage: ''
 }
 // let initialAuthState1 = {
 //     userId: null as number | null,
@@ -22,6 +24,7 @@ export type initialAuthStateType = {
     login: string
     email: string
     isAuth: boolean
+    errorMessage: string
 }
 
 export const authReducer = (state: initialAuthStateType = initialAuthState, action: authReducerType) => {
@@ -29,13 +32,19 @@ export const authReducer = (state: initialAuthStateType = initialAuthState, acti
         case SET_USER_DATA: {
             return {...state, ...action.payload}
         }
+        case "ERROR-MESSAGE": {
+            return {...state, errorMessage: action.errorMessage}
+        }
         default:
             return state
     }
 }
 
-export const setUserDataAC = (userId: number , login: string , email: string , isAuth: boolean) => {
+export const setUserDataAC = (userId: number, login: string, email: string, isAuth: boolean) => {
     return {type: SET_USER_DATA, payload: {userId, login, email, isAuth}} as const
+}
+export const errorMessageAC = (errorMessage: string) => {
+    return {type: ERROR_MESSAGE, errorMessage} as const
 }
 export const authMeTC = () => (dispatch: Dispatch) => {
     authAPI.authMe()
@@ -55,6 +64,10 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             if (response.data.resultCode === 0) {
                 console.log(response)
                 dispatch(authMeTC())
+                dispatch(errorMessageAC(''))
+            }
+            if(response.data.resultCode===1){
+                dispatch(errorMessageAC(response.data.messages[0]))
             }
         })
 }
@@ -69,5 +82,5 @@ export const logoutTC = () => (dispatch: Dispatch) => {
 }
 
 type setUserDataACType = ReturnType<typeof setUserDataAC>
-
-type authReducerType = setUserDataACType
+type errorMessageACType = ReturnType<typeof errorMessageAC>
+type authReducerType = setUserDataACType | errorMessageACType
