@@ -2,9 +2,11 @@ import {AppDispatch} from "./redux-store";
 import {authMeTC} from "./auth-reducer";
 
 const INITIALIZED_SUCCESS = 'SET-INITIALIZED'
+
 let initialAppState: initialStateType = {
     initialized: false
 }
+
 export type initialStateType = {
     initialized: boolean
 }
