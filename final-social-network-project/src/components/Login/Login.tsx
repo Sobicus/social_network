@@ -44,7 +44,7 @@ const SignupForm = () => {
             return errors;
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+
             dispatch(loginTC(values.email, values.password, values.rememberMe))
         },
     });

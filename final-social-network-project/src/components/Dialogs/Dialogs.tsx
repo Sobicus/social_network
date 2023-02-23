@@ -8,7 +8,7 @@ type DialogsType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
     dialogsPage: dialogsPageType
-    isAuth: boolean
+
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {

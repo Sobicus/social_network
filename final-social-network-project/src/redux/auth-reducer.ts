@@ -46,8 +46,8 @@ export const setUserDataAC = (userId: number, login: string, email: string, isAu
 export const errorMessageAC = (errorMessage: string) => {
     return {type: ERROR_MESSAGE, errorMessage} as const
 }
-export const authMeTC = () => (dispatch: Dispatch) => {
-    authAPI.authMe()
+export const authMeTC =  () => async(dispatch: AppDispatch) => {
+  return authAPI.authMe()
         .then(res => {
             console.log(res)
             if (res.data.resultCode === 0) {
