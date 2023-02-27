@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from "react";
-import {log} from "util";
 
 type ProfileStatusPropsType = {
     status: string
