@@ -1,27 +1,41 @@
 import {useFormik} from "formik";
-import {loginTC} from "../../../../redux/auth-reducer";
 import {useAppDispatch} from "../../../../redux/redux-store";
+import {addPostAC, updateNewPostTextAC} from "../../../../redux/profile-reducer";
 
 export const AddPostForm = () => {
     const dispatch = useAppDispatch()
     const formik = useFormik({
         initialValues: {
-            text: '',
+            post: '',
         },
         validate(values) {
             const errors: loginErrorType = {};
-            if (values.text === '' || values.text.trim(' ') === '') {
+            if (values.post === '' && values.post.trim() === '') {
                 errors.text = 'Please enter the text of the post';
             }
         },
         onSubmit: values => {
-            dispatch(loginTC(values.email, values.password, values.rememberMe))
+            dispatch(updateNewPostTextAC(values.post))
+            dispatch(addPostAC())
+            values.post=''
         },
     });
 
-    return <div>
-
-    </div>
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <input
+                id="post"
+                type="post"
+                {...formik.getFieldProps('post')}
+            />
+            {formik.touched.post && formik.errors.post ?
+                <div style={{color: 'red'}}>{formik.errors.post}</div>
+                : null
+            }
+            <br/>
+            <button type="submit">Add Post</button>
+        </form>
+    )
 }
 type loginErrorType = {
     text?: string

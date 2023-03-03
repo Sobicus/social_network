@@ -2,6 +2,7 @@ import React from "react";
 import {postsDataType} from "../../../redux/store";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
+import {AddPostForm} from "./AddPostForm/AddPostrForm";
 
 type MyPostsType = {
     posts: Array<postsDataType>
@@ -49,6 +50,9 @@ export const MyPosts = React.memo((props: MyPostsType) => {
                     likesCounter={el.likesCounter}
                     key={el.id}/>)}
             </div>
+            <hr/>
+            <AddPostForm/>
+            <hr/>
         </div>
     )
 })
