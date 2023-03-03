@@ -10,47 +10,45 @@ type MyPostsType = {
     updateNewPostText: (text: string) => void
 }
 
-export class MyPosts extends React.Component<MyPostsType> {
-    render() {
+export const MyPosts = React.memo((props: MyPostsType) => {
 
-        let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-        const onAddPost = () => {
-            this.props.addPost()
-        }
+    const onAddPost = () => {
+        props.addPost()
+    }
 
-        const onPostChange = () => {
-            let text = newPostElement.current?.value
-            if (text)
-                this.props.updateNewPostText(text)
-        }
+    const onPostChange = () => {
+        let text = newPostElement.current?.value
+        if (text)
+            props.updateNewPostText(text)
+    }
 
-        return (
-            <div className={style.posts_block}>
-                <h3>
-                    My posts
-                </h3>
+    return (
+        <div className={style.posts_block}>
+            <h3>
+                My posts
+            </h3>
+            <div>
                 <div>
-                    <div>
                     <textarea onChange={onPostChange}
                               ref={newPostElement}
-                              value={this.props.newPostText}
+                              value={props.newPostText}
                     />
-                    </div>
-                    <div>
-                        <button onClick={onAddPost}>
-                            Add post
-                        </button>
-                    </div>
                 </div>
-                <div className={style.posts}>
-                    {this.props.posts.map(el => <Post
-                        id={el.id}
-                        message={el.message}
-                        likesCounter={el.likesCounter}
-                        key={el.id}/>)}
+                <div>
+                    <button onClick={onAddPost}>
+                        Add post
+                    </button>
                 </div>
             </div>
-        )
-    }
-}
+            <div className={style.posts}>
+                {props.posts.map(el => <Post
+                    id={el.id}
+                    message={el.message}
+                    likesCounter={el.likesCounter}
+                    key={el.id}/>)}
+            </div>
+        </div>
+    )
+})

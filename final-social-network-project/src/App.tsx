@@ -22,6 +22,7 @@ type AppType = {
 }
 
 class App extends React.Component<AppType> {
+
     componentDidMount() {
         this.props.initializedApp()
     }
