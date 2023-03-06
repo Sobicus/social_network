@@ -1,6 +1,6 @@
 import {useFormik} from "formik";
 import {useAppDispatch} from "../../../../redux/redux-store";
-import {addPostAC, updateNewPostTextAC} from "../../../../redux/profile-reducer";
+import {addPostAC} from "../../../../redux/profile-reducer";
 
 export const AddPostForm = () => {
     const dispatch = useAppDispatch()
@@ -10,13 +10,13 @@ export const AddPostForm = () => {
         },
         validate(values) {
             const errors: loginErrorType = {};
-            if (values.post === '' && values.post.trim() === '') {
-                errors.text = 'Please enter the text of the post';
+            if (!values.post) {
+                errors.post = 'Please enter the text of the post';
             }
+            return errors
         },
         onSubmit: values => {
-            dispatch(updateNewPostTextAC(values.post))
-            dispatch(addPostAC())
+            dispatch(addPostAC(values.post))
             values.post=''
         },
     });
@@ -25,7 +25,7 @@ export const AddPostForm = () => {
         <form onSubmit={formik.handleSubmit}>
             <input
                 id="post"
-                type="post"
+                type="text"
                 {...formik.getFieldProps('post')}
             />
             {formik.touched.post && formik.errors.post ?
@@ -38,5 +38,5 @@ export const AddPostForm = () => {
     )
 }
 type loginErrorType = {
-    text?: string
+    post?: string
 }

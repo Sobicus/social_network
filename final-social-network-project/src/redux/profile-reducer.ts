@@ -3,18 +3,18 @@ import {postsDataType, profilePageType, ProfileType} from "./store";
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const DELETE_POST = 'DELETE-POST';
+/*const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';*/
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 
 let initialState: profilePageType = {
     postsData: [
-        {id: '1', message: 'It`s my first post', likesCounter: 1},
-        {id: '2', message: 'Hi, how are you?', likesCounter: 5},
-        {id: '3', message: 'GO GO GO?', likesCounter: 7},
-        {id: '4', message: 'Test props', likesCounter: 13},
+        {id: 1, message: 'It`s my first post', likesCounter: 1},
+        {id: 2, message: 'Hi, how are you?', likesCounter: 5},
+        {id: 3, message: 'GO GO GO?', likesCounter: 7},
+        {id: 4, message: 'Test props', likesCounter: 13},
     ],
-    newPostText: '',
     profile:
         {
             "aboutMe": "я круто чувак 11%",
@@ -43,15 +43,18 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
     switch (action.type) {
         case ADD_POST: {
             const newPost: postsDataType = {
-                id: '5',
-                message: state.newPostText,
+                id: 5,
+                message: action.newPost,
                 likesCounter: 1
             }
             return {...state, postsData: [...state.postsData, newPost], newPostText: ''}
         }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText}
+        case DELETE_POST:{
+            return {...state, postsData: state.postsData.filter(el=>el.id!==action.postId)}
         }
+        /*case UPDATE_NEW_POST_TEXT: {
+            return {...state, newPostText: action.newText}
+        }*/
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
@@ -62,17 +65,21 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
             return state
     }
 }
-export const addPostAC = (): AddPostACType => {
+export const addPostAC = (newPost: string): AddPostACType => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        newPost
     } as const
 }
-export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
+export const deletePostAC = (postId: number):deletePostACType => {
+    return {type: DELETE_POST, postId} as const
+}
+/*export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
     } as const
-}
+}*/
 export const setUserProfileAC = (profile: ProfileType): setUserProfileType => {
     return {type: SET_USER_PROFILE, profile} as const
 }
@@ -107,13 +114,18 @@ export type setUserProfileType = {
 }
 export type AddPostACType = {
     type: 'ADD-POST'
+    newPost: string
 }
-export type UpdateNewPostTextACType = {
+type deletePostACType = {
+    type: 'DELETE-POST'
+    postId:number
+}
+/*export type UpdateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
-}
+}*/
 export type actionsProfileReducerType =
     AddPostACType
-    | UpdateNewPostTextACType
     | setUserProfileType
     | setStatusProfileACType
+    | deletePostACType

@@ -2,7 +2,6 @@ import React from "react";
 import style from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/store";
 import {Preloader} from "../../common/preloader/Preloader";
-import {ProfileStatus} from "./ProfileStatus";
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks";
 
 type profileInfoType = {
@@ -22,7 +21,7 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
                     alt=""/>
             </div>
             <div className={style.description_block} style={{margin: 10}}>
-                <img src={props.profile.photos.large} alt="Photo large" style={{borderRadius: 500, margin: 5}}/>
+                <img src={props.profile.photos.large} alt="Large avatar" style={{borderRadius: 500, margin: 5}}/>
                 {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
