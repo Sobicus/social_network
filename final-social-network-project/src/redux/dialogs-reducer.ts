@@ -1,7 +1,7 @@
 import {ActionsType, messageDataType, dialogsPageType} from "./store";
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const UPDATE_NEW_MESSAGE_BODY = 'social-network/dialogs/UPDATE-NEW-MESSAGE-BODY';
+const SEND_MESSAGE = 'social-network/dialogs/SEND-MESSAGE';
 
 let initialState:dialogsPageType =
     {
@@ -70,10 +70,10 @@ export const updateNewMessageBodyAC = (body: string): updateNewMessageBodyACType
 }
 
 export type sendMessageACType = {
-    type: 'SEND-MESSAGE'
+    type: 'social-network/dialogs/SEND-MESSAGE'
 }
 export type updateNewMessageBodyACType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY'
+    type: 'social-network/dialogs/UPDATE-NEW-MESSAGE-BODY'
     body: string
 }
 

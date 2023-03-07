@@ -2,11 +2,11 @@ import {Dispatch} from "redux";
 import {postsDataType, profilePageType, ProfileType} from "./store";
 import {profileAPI} from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const DELETE_POST = 'DELETE-POST';
+const ADD_POST = 'social-network/profile/ADD-POST';
+const DELETE_POST = 'social-network/profile/DELETE-POST';
 /*const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';*/
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const SET_STATUS = 'SET-STATUS';
+const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
+const SET_STATUS = 'social-network/profile/SET-STATUS';
 
 let initialState: profilePageType = {
     postsData: [
@@ -49,8 +49,8 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
             }
             return {...state, postsData: [...state.postsData, newPost], newPostText: ''}
         }
-        case DELETE_POST:{
-            return {...state, postsData: state.postsData.filter(el=>el.id!==action.postId)}
+        case DELETE_POST: {
+            return {...state, postsData: state.postsData.filter(el => el.id !== action.postId)}
         }
         /*case UPDATE_NEW_POST_TEXT: {
             return {...state, newPostText: action.newText}
@@ -71,7 +71,7 @@ export const addPostAC = (newPost: string): AddPostACType => {
         newPost
     } as const
 }
-export const deletePostAC = (postId: number):deletePostACType => {
+export const deletePostAC = (postId: number): deletePostACType => {
     return {type: DELETE_POST, postId} as const
 }
 /*export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
@@ -86,39 +86,35 @@ export const setUserProfileAC = (profile: ProfileType): setUserProfileType => {
 export const setStatusProfileAC = (status: string): setStatusProfileACType => {
     return {type: SET_STATUS, status} as const
 }
-export const getStatusProfileTC = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getStatusProfile(userId).then(response => {
-        dispatch(setStatusProfileAC(response.data))
-    })
+export const getStatusProfileTC = (userId: number) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatusProfile(userId)
+    dispatch(setStatusProfileAC(response.data))
 }
-export const updateStatusProfileTC = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatusProfile(status).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setStatusProfileAC(status))
-        }
-    })
+export const updateStatusProfileTC = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.updateStatusProfile(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusProfileAC(status))
+    }
 }
-export const setUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfileAC(response.data))
-        })
+export const setUserProfileTC = (userId: number) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfileAC(response.data))
 }
 export type setStatusProfileACType = {
-    type: 'SET-STATUS'
+    type: 'social-network/profile/SET-STATUS'
     status: string
 }
 export type setUserProfileType = {
-    type: 'SET-USER-PROFILE'
+    type: 'social-network/profile/SET-USER-PROFILE'
     profile: ProfileType
 }
 export type AddPostACType = {
-    type: 'ADD-POST'
+    type: 'social-network/profile/ADD-POST'
     newPost: string
 }
 type deletePostACType = {
-    type: 'DELETE-POST'
-    postId:number
+    type: 'social-network/profile/DELETE-POST'
+    postId: number
 }
 /*export type UpdateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'

@@ -1,7 +1,7 @@
 import {AppDispatch} from "./redux-store";
 import {authMeTC} from "./auth-reducer";
 
-const INITIALIZED_SUCCESS = 'SET-INITIALIZED'
+const INITIALIZED_SUCCESS = 'social-network/app/SET-INITIALIZED'
 
 let initialAppState: initialStateType = {
     initialized: false

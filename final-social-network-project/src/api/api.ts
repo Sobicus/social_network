@@ -69,7 +69,7 @@ type usersPhotosStateType = {
     small: string
     large: string
 }
-type FollowUnfollowType = {
+export type FollowUnfollowType = {
     resultCode: number
     messages: Array<string>
     data: {}
