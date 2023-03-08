@@ -1,4 +1,4 @@
-import style from "./users.module.css";
+import style from './Paginator.module.css'
 import React from "react";
 
 

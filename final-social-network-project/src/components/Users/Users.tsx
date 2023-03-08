@@ -1,9 +1,7 @@
-import style from "./users.module.css";
-import userPhoto from "../../assets/img/users_avatar.png";
 import React from "react";
 import {usersStateType} from "../../redux/store";
-import {NavLink} from "react-router-dom";
-import {Paginator} from "./Paginator";
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 type usersType = {
     totalUsersCount: number
@@ -38,7 +36,13 @@ export const Users: React.FC<usersType> = ({totalUsersCount, pageSize, currentPa
             {/*</div>*/}
             <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
                        onPageChanged={onPageChanged}/>
-            {props.users.map(u => <div key={u.id}>
+            {props.users.map(u => <User user={u}
+                                        follow={props.follow}
+                                        unfollow={props.unfollow}
+                                        followingInProgress={props.followingInProgress}
+                                        key={u.id}
+                />
+                /*<div key={u.id}>
                 <span>
                     <div>
                         <NavLink to={'/profile/' + u.id}>
@@ -68,7 +72,8 @@ export const Users: React.FC<usersType> = ({totalUsersCount, pageSize, currentPa
                         <div>{'u.location.city'}</div>
                     </span>
                 </span>
-            </div>)}
+            </div>*/
+            )}
 
         </div>
     )
