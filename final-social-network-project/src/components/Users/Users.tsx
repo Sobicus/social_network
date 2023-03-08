@@ -3,6 +3,7 @@ import userPhoto from "../../assets/img/users_avatar.png";
 import React from "react";
 import {usersStateType} from "../../redux/store";
 import {NavLink} from "react-router-dom";
+import {Paginator} from "./Paginator";
 
 type usersType = {
     totalUsersCount: number
@@ -16,25 +17,27 @@ type usersType = {
     followingInProgress: Array<number>
 
 }
-export const Users: React.FC<usersType> = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+export const Users: React.FC<usersType> = ({totalUsersCount, pageSize, currentPage, onPageChanged, ...props}) => {
+    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    // let pages = []
+    // for (let i = 1; i <= pagesCount; i++) {
+    //     pages.push(i)
+    // }
 
     return (
         <div>
-            <div>
-                {pages.map(el => {
-                        return <span className={props.currentPage === el ? style.selectedPage : ''} onClick={() => {
-                            props.onPageChanged(el)
-                        }}>
-                            {el}
-                        </span>
-                    }
-                )}
-            </div>
+            {/*<div>*/}
+            {/*    {pages.map(el => {*/}
+            {/*            return <span className={props.currentPage === el ? style.selectedPage : ''} onClick={() => {*/}
+            {/*                props.onPageChanged(el)*/}
+            {/*            }}>*/}
+            {/*                {el}*/}
+            {/*            </span>*/}
+            {/*        }*/}
+            {/*    )}*/}
+            {/*</div>*/}
+            <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
+                       onPageChanged={onPageChanged}/>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>

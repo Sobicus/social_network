@@ -1,20 +1,20 @@
 import React, {FC} from 'react';
+import {Route, Routes} from "react-router-dom";
+import {connect} from "react-redux";
+import {compose} from "redux";
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import ProfileContainer, {withRouter} from './components/Profile/ProfileContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {Login} from './components/Login/Login';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {connect} from "react-redux";
 import {initializedAppTC} from "./redux/app-reducer";
 import {RootStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/preloader/Preloader";
-import {compose} from "redux";
 
 type AppType = {
     initializedApp: () => void
@@ -28,8 +28,8 @@ class App extends React.Component<AppType> {
     }
 
     render() {
-        if (!this.props.initialized){
-           return <Preloader/>
+        if (!this.props.initialized) {
+            return <Preloader/>
         }
 
         return (

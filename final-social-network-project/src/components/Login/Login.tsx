@@ -3,7 +3,6 @@ import {loginTC} from "../../redux/auth-reducer";
 import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
 import {Navigate} from "react-router-dom";
 
-
 export const Login = () => {
     const authMe = useAppSelector(state => state.auth.isAuth)
     if (authMe) {
@@ -16,7 +15,6 @@ export const Login = () => {
         </div>
     )
 }
-
 
 const SignupForm = () => {
     const dispatch = useAppDispatch()
@@ -55,13 +53,6 @@ const SignupForm = () => {
                 id="email"
                 type="email"
                 {...formik.getFieldProps('email')}
-                /*
-                name="email"
-                placeholder="Email Address"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                */
             />
             {formik.touched.email && formik.errors.email ?
                 <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
@@ -79,7 +70,7 @@ const SignupForm = () => {
                 <div style={{color: 'red'}}>{formik.errors.password}</div>
                 : null
             }
-            {errorMessage.length > 0 ? <div style={{color:'red', background:"orange"}}>{errorMessage}</div> : ''}
+            {errorMessage.length > 0 ? <div style={{color: 'red', background: "orange"}}>{errorMessage}</div> : ''}
             <input
                 type="checkbox"
                 id="rememberMe"
@@ -96,9 +87,4 @@ type loginErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
-}
-type LoginFormikType = {
-    email: string
-    password: string
-    rememberMe: boolean
 }
