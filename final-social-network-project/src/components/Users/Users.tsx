@@ -34,8 +34,8 @@ export const Users: React.FC<usersType> = ({totalUsersCount, pageSize, currentPa
             {/*        }*/}
             {/*    )}*/}
             {/*</div>*/}
-            <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
-                       onPageChanged={onPageChanged}/>
+            <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
+                       onPageChanged={onPageChanged} portionSize={10}/>
             {props.users.map(u => <User user={u}
                                         follow={props.follow}
                                         unfollow={props.unfollow}

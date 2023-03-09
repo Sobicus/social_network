@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import {ThunkAction, Action} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {appReducer} from "./app-reducer";
+import {compose} from "redux";
 
 
 let rootReducer = combineReducers({
@@ -16,6 +17,8 @@ let rootReducer = combineReducers({
     auth: authReducer,
     app: appReducer
 })
+
+
 
 export let store = createStore(rootReducer, applyMiddleware(thunk))
 
