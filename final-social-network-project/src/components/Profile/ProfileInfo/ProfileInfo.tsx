@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent } from "react";
 import style from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/store";
 import {Preloader} from "../../common/preloader/Preloader";
@@ -9,10 +9,21 @@ type profileInfoType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
+    isOwner:boolean
 }
 export const ProfileInfo: React.FC<profileInfoType> = (props) => {
     if (!props.profile) {
         return <Preloader/>
+    }
+    const mainPhotoSelected=(e:ChangeEvent<HTMLInputElement>)=>{
+        if (e.target.files && e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+        console.log(e.target.files!.length)
+        console.log(e.target.files?.length)
+        // console.log(e.target.files.length)
+        console.log(e.target.files)
+        console.log(e.currentTarget.value)
     }
     return (
         <div>
@@ -22,8 +33,9 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
                     alt=""/>
             </div>
             <div className={style.description_block} style={{margin: 10}}>
-                <img src={props.profile.photos.large || userPhoto} alt="Large avatar" className={style.mainePhoto}/>
+                <img src={props.profile.photos.large && userPhoto} alt="Large avatar" className={style.mainePhoto}/>
                 <img src={props.profile.photos.small} alt="Large avatar" style={{borderRadius: 500, margin: 5}}/>
+                {props.isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                 {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>

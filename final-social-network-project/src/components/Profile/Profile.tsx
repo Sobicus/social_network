@@ -7,12 +7,13 @@ type profileComponentType = {
     profile: ProfileType
     status:string
     updateStatus:(status:string)=>void
+    isOwner:boolean
 }
 
 export const Profile: React.FC<profileComponentType> = (props) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner}/>
             <MyPostsContainer/>
         </div>
     )

@@ -77,8 +77,11 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
 
         return (
             <div>
-                <Profile profile={this.props.profile} status={this.props.status}
-                         updateStatus={this.props.updateStatus}/>
+                <Profile profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}
+                         isOwner={!this.props.match?.userId}
+                />
             </div>)
     }
 }
