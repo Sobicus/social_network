@@ -20,8 +20,9 @@ type ProfileContainerType<T = undefined> = {
     getUserStatus: (userId: number) => void
     updateStatus: (status: string) => void
     id: number
-    isAuth:boolean
+    isAuth: boolean
 }
+
 export function withRouter<T>(Component: ComponentType<T>) {
     return function (props: T) {
         const match = useParams();
@@ -29,12 +30,13 @@ export function withRouter<T>(Component: ComponentType<T>) {
         return <Component {...newProps}/>
     }
 }
+
 type ProfileParamsType = {
     userId: number
 }
-class ProfileContainer extends React.Component<ProfileContainerType<ProfileParamsType>> {
 
-    componentDidMount() {
+class ProfileContainer extends React.Component<ProfileContainerType<ProfileParamsType>> {
+    refreshProfile() {
         let userId = this.props.match?.userId
 
         if (!userId) {
@@ -42,6 +44,33 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
         }
         this.props.setUserProfile(userId)
         this.props.getUserStatus(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+        /*
+        let userId = this.props.match?.userId
+
+        if (!userId) {
+            userId = this.props.id
+        }
+        this.props.setUserProfile(userId)
+        this.props.getUserStatus(userId)
+        */
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileContainerType<ProfileParamsType>>, prevState: Readonly<ProfileContainerType<ProfileParamsType>>) {
+        if(this.props.match?.userId !== prevProps.match?.userId)
+        this.refreshProfile()
+        /*
+        let userId = this.props.match?.userId
+
+        if (!userId) {
+            userId = this.props.id
+        }
+        this.props.setUserProfile(userId)
+        this.props.getUserStatus(userId)
+        */
     }
 
     render() {
@@ -59,7 +88,7 @@ let mapStateToProps = (state: RootStateType) => ({
         /*isAuth: state.auth.isAuth*/
         status: state.profilePage.status,
         id: state.auth.userId,
-        isAuth:state.auth.isAuth
+        isAuth: state.auth.isAuth
     }
 )
 export default compose<React.ComponentType>(connect(mapStateToProps, {
