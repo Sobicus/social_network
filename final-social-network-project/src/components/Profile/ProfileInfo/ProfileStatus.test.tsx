@@ -32,6 +32,8 @@ describe('ProfileStatus component', () => {
 
         const root = await component.root;
         let span = await root.findByType("span");
+        console.log(span)
+
         expect(span.children[0]).toBe("My first test component");
     });*/
 

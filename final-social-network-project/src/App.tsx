@@ -17,7 +17,7 @@ import {RootStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/preloader/Preloader";
 
 
-// const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
+//const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
 const DialogsContainer = React.lazy(() => Promise.resolve(
     {default: Foo}
 ))
