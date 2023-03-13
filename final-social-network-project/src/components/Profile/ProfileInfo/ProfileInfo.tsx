@@ -10,6 +10,7 @@ type profileInfoType = {
     status: string
     updateStatus: (status: string) => void
     isOwner:boolean
+    savePhoto: (file: File)=>void
 }
 export const ProfileInfo: React.FC<profileInfoType> = (props) => {
     if (!props.profile) {
@@ -17,7 +18,7 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
     }
     const mainPhotoSelected=(e:ChangeEvent<HTMLInputElement>)=>{
         if (e.target.files && e.target.files.length) {
-            savePhoto(e.target.files[0]);
+            props.savePhoto(e.target.files[0]);
         }
         console.log(e.target.files!.length)
         console.log(e.target.files?.length)
@@ -33,8 +34,10 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
                     alt=""/>
             </div>
             <div className={style.description_block} style={{margin: 10}}>
-                <img src={props.profile.photos.large && userPhoto} alt="Large avatar" className={style.mainePhoto}/>
-                <img src={props.profile.photos.small} alt="Large avatar" style={{borderRadius: 500, margin: 5}}/>
+                1. Large avatar
+                <img src={props.profile.photos.large || userPhoto} alt="Large avatar" className={style.mainePhoto}/>
+                2. Small avatar
+                <img src={props.profile.photos.small} alt="Small avatar" className={style.smallPhoto}/>
                 {props.isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
                 {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>

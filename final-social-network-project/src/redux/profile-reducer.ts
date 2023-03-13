@@ -1,12 +1,14 @@
 import {Dispatch} from "redux";
-import {postsDataType, profilePageType, ProfileType} from "./store";
+import {postsDataType, profilePageType, ProfileType, usersPhotosStateType} from "./store";
 import {profileAPI} from "../api/api";
+import {AppDispatch} from "./redux-store";
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const DELETE_POST = 'social-network/profile/DELETE-POST';
 /*const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';*/
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
 const SET_STATUS = 'social-network/profile/SET-STATUS';
+const SAVE_PHOTO_SUCCESS = 'social-network/profile/SAVE-PHOTO-SUCCESS'
 
 let initialState: profilePageType = {
     postsData: [
@@ -15,8 +17,8 @@ let initialState: profilePageType = {
         {id: 3, message: 'GO GO GO?', likesCounter: 7},
         {id: 4, message: 'Test props', likesCounter: 13},
     ],
-    profile:
-        {
+    profile: undefined,
+    /*{
             "aboutMe": "я круто чувак 11%",
             "contacts": {
                 "facebook": "facebook.com",
@@ -36,7 +38,7 @@ let initialState: profilePageType = {
                 "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                 "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
             }
-        },
+        },*/
     status: 'Field for status'
 }
 export const profileReducer = (state: profilePageType = initialState, action: actionsProfileReducerType) => {
@@ -60,6 +62,15 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
         }
         case SET_STATUS: {
             return {...state, status: action.status}
+        }
+        case SAVE_PHOTO_SUCCESS: {
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
+            // if (state.profile) {
+            //     return {...state, profile: {...state.profile, photos: action.photos}}
+            // } else {
+            //
+            // return state
+            // }
         }
         default:
             return state
@@ -86,6 +97,12 @@ export const setUserProfileAC = (profile: ProfileType): setUserProfileType => {
 export const setStatusProfileAC = (status: string): setStatusProfileACType => {
     return {type: SET_STATUS, status} as const
 }
+export const savePhotoSuccessAC = (photos: usersPhotosStateType): savePhotoSuccessACType => {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+    } as const
+}
 export const getStatusProfileTC = (userId: number) => async (dispatch: Dispatch) => {
     let response = await profileAPI.getStatusProfile(userId)
     dispatch(setStatusProfileAC(response.data))
@@ -99,6 +116,12 @@ export const updateStatusProfileTC = (status: string) => async (dispatch: Dispat
 export const setUserProfileTC = (userId: number) => async (dispatch: Dispatch) => {
     let response = await profileAPI.getProfile(userId)
     dispatch(setUserProfileAC(response.data))
+}
+export const savePhotoTC = (file: File) => async (dispatch: AppDispatch) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccessAC(response.data.data.photos))
+    }
 }
 export type setStatusProfileACType = {
     type: 'social-network/profile/SET-STATUS'
@@ -116,6 +139,10 @@ type deletePostACType = {
     type: 'social-network/profile/DELETE-POST'
     postId: number
 }
+type savePhotoSuccessACType = {
+    type: 'social-network/profile/SAVE-PHOTO-SUCCESS',
+    photos: usersPhotosStateType
+}
 /*export type UpdateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
@@ -125,3 +152,4 @@ export type actionsProfileReducerType =
     | setUserProfileType
     | setStatusProfileACType
     | deletePostACType
+    | savePhotoSuccessACType

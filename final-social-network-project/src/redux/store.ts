@@ -121,7 +121,7 @@ export type stateType = {
 }
 export type profilePageType = {
     postsData: Array<postsDataType>
-    profile: ProfileType
+    profile: ProfileType | undefined
     status:string
 }
 export type dialogsPageType = {
