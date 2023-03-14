@@ -122,7 +122,7 @@ export type stateType = {
 export type profilePageType = {
     postsData: Array<postsDataType>
     profile: ProfileType | undefined
-    status:string
+    status: string
 }
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
@@ -172,6 +172,19 @@ export type ProfileType = {
     userId: number
     photos: usersPhotosStateType
 }
+//below differents  variants typization for Object.keys().map
+//1
+/*
+export type ContactsKeys = 'facebook' | 'website' | 'vk' | 'twitter' | 'instagram' | 'youtube' | 'github' | 'mainLink'
+export type profileContactsType = Record<ContactsKeys, string>
+*/
+//2
+/*
+export type profileContactsType={
+    [key: string]: string
+}
+*/
+
 export type profileContactsType = {
     facebook: string
     website: string
