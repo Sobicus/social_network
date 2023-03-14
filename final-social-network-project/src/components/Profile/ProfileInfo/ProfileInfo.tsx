@@ -46,33 +46,53 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
                 3. Profile status
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 <br/>
-                <div>
-                    <div>
-                        <b>Full name:</b> {props.profile.fullName}
-                    </div>
-                    <div>
-                        <b>Looking for a job:</b> {props.profile.lookingForAJob ? 'Yes' : 'No'}
-                    </div>
-                    {props.profile.lookingForAJob &&
-                        <div>
-                            <b>My professional skills:</b> {props.profile.lookingForAJobDescription}
-                        </div>
-                    }
-                    <div>
-                        <b>About me:</b> {props.profile.aboutMe}
-                    </div>
-                    <div>
-                        <b>Contacts:</b> {Object.keys(props.profile.contacts).map((key) => {
-                        return <Contact key={key} contactTitle={key}
-                                        contactValue={props.profile.contacts[key as keyof profileContactsType]}/>
-                    })}
-                    </div>
-                </div>
+                <ProfileData aboutMe={props.profile.aboutMe}
+                             contacts={props.profile.contacts}
+                             lookingForAJob={props.profile.lookingForAJob}
+                             lookingForAJobDescription={props.profile.lookingForAJobDescription}
+                             fullName={props.profile.fullName}
+                             userId={props.profile.userId}
+                             photos={props.profile.photos}
+                />
             </div>
         </div>
     )
 }
-const ProfileData
+
+const ProfileData: React.FC<ProfileType> = ({
+                                                aboutMe,
+                                                contacts,
+                                                lookingForAJob,
+                                                lookingForAJobDescription,
+                                                fullName,
+                                                userId,
+                                                photos
+                                            }) => {
+    return (
+        <div>
+            <div>
+                <b>Full name:</b> {fullName}
+            </div>
+            <div>
+                <b>Looking for a job:</b> {lookingForAJob ? 'Yes' : 'No'}
+            </div>
+            {lookingForAJob &&
+                <div>
+                    <b>My professional skills:</b> {lookingForAJobDescription}
+                </div>
+            }
+            <div>
+                <b>About me:</b> {aboutMe}
+            </div>
+            <div>
+                <b>Contacts:</b> {Object.keys(contacts).map((key) => {
+                return <Contact key={key} contactTitle={key}
+                                contactValue={contacts[key as keyof profileContactsType]}/>
+            })}
+            </div>
+        </div>
+    )
+}
 type ContactType = {
     contactTitle: string
     contactValue: string
