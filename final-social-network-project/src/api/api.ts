@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileType} from "../redux/store";
+import {profileContactsType, ProfileType} from "../redux/store";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -36,6 +36,9 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+    saveProfile(profile: setProfileType) {
+        return instance.put('profile', profile)
     }
 }
 export const authAPI = {
@@ -93,4 +96,11 @@ type responseDataType = {
     id: number
     email: string
     login: string
+}
+export type setProfileType = {
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe:string
+    contacts: profileContactsType
 }

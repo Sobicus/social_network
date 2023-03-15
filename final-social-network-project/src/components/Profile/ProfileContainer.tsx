@@ -4,13 +4,14 @@ import connect from "react-redux/es/components/connect";
 import {ProfileType} from "../../redux/store";
 import {
     getStatusProfileTC,
-    savePhotoTC,
+    savePhotoTC, saveProfileTC,
     setUserProfileTC,
     updateStatusProfileTC
 } from "../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
 import {RootStateType} from "../../redux/redux-store";
 import {compose} from "redux";
+import {setProfileType} from "../../api/api";
 
 type ProfileContainerType<T = undefined> = {
     profile: ProfileType
@@ -23,6 +24,7 @@ type ProfileContainerType<T = undefined> = {
     id: number
     isAuth: boolean
     savePhoto: (file: File) => void
+    saveProfile:(profile:setProfileType)=>void
 }
 
 export function withRouter<T>(Component: ComponentType<T>) {
@@ -84,6 +86,7 @@ class ProfileContainer extends React.Component<ProfileContainerType<ProfileParam
                          updateStatus={this.props.updateStatus}
                          isOwner={!this.props.match?.userId}
                          savePhoto={this.props.savePhoto}
+                         saveProfile={this.props.saveProfile}
                 />
             </div>)
     }
@@ -101,7 +104,8 @@ export default compose<React.ComponentType>(connect(mapStateToProps, {
     setUserProfile: setUserProfileTC,
     getUserStatus: getStatusProfileTC,
     updateStatus: updateStatusProfileTC,
-    savePhoto: savePhotoTC
+    savePhoto: savePhotoTC,
+    saveProfile:saveProfileTC
 }), withRouter, /*withAuthRedirect*/)(ProfileContainer)
 
 // let ProfileContainerWithAuthRedirect =withAuthRedirect(ProfileContainer)

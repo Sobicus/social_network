@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {postsDataType, profilePageType, ProfileType, usersPhotosStateType} from "./store";
-import {profileAPI} from "../api/api";
+import {profileAPI, setProfileType} from "../api/api";
 import {AppDispatch} from "./redux-store";
 
 const ADD_POST = 'social-network/profile/ADD-POST';
@@ -102,6 +102,10 @@ export const savePhotoSuccessAC = (photos: usersPhotosStateType): savePhotoSucce
         type: SAVE_PHOTO_SUCCESS,
         photos
     } as const
+}
+
+export const saveProfileTC=(profile:setProfileType)=>async (dispatch:Dispatch)=>{
+    await profileAPI.saveProfile(profile)
 }
 export const getStatusProfileTC = (userId: number) => async (dispatch: Dispatch) => {
     let response = await profileAPI.getStatusProfile(userId)

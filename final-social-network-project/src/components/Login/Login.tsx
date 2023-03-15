@@ -56,7 +56,7 @@ const SignupForm = () => {
             />
             {formik.touched.email && formik.errors.email ?
                 <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
-            <label htmlFor="email">Password</label>
+            <label htmlFor="password">Password</label>
             <input
                 id="password"
                 name="password"
