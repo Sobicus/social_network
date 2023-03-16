@@ -1,15 +1,25 @@
-import {useFormik} from "formik";
+import {Field, useFormik} from "formik";
 import React from "react";
 import {ProfileType} from "../../../redux/store";
 import {setProfileType} from "../../../api/api";
-import {useAppDispatch} from "../../../redux/redux-store";
+import {useAppDispatch, useAppSelector} from "../../../redux/redux-store";
+import {useDispatch} from "react-redux";
 
 type ProfileDataFormType = {
     profile: ProfileType
-    saveProfile: (profile: setProfileType) => void
+    saveProfile: (profile: setProfileType, setEditMode: (editMode: boolean) => void) => void
+    setEditMode: (editMode: boolean) => void
 }
-export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, saveProfile}) => {
-    const dispatch = useAppDispatch()
+export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, saveProfile, setEditMode}) => {
+    const dispatch = useDispatch()
+    const errorMessage = useAppSelector(state => state.profilePage.errorMessage)
+
+    const onSubmitFormik=(saveProfile: (profile: setProfileType, setEditMode: (editMode: boolean) => void) => void,
+                          newProfile:TestType,
+                          setEditMode: (editMode: boolean) => void)=>{
+        saveProfile(newProfile, setEditMode)
+    }
+
     const formik = useFormik({
         initialValues: {
             fullName: profile.fullName,
@@ -27,39 +37,50 @@ export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, savePro
             mainLink: profile.contacts.mainLink,
         },
         onSubmit: values => {
-            const newProfile={fullName: values.fullName,
+            const newProfile = {
+                fullName: values.fullName,
                 lookingForAJob: values.lookingForAJob,
                 lookingForAJobDescription: values.lookingForAJobDescription,
                 aboutMe: values.aboutMe,
                 contacts: {
-                facebook: values.facebook,
-                website:values.website,
-                vk: values.vk,
-                twitter: values.twitter,
-                instagram: values.instagram,
-                youtube: values.youtube,
-                github: values.github,
-                mainLink: values.mainLink}}
-           saveProfile(newProfile)
-            alert(JSON.stringify(newProfile));
+                    facebook: values.facebook,
+                    website: values.website,
+                    vk: values.vk,
+                    twitter: values.twitter,
+                    instagram: values.instagram,
+                    youtube: values.youtube,
+                    github: values.github,
+                    mainLink: values.mainLink
+                }
+            }
+            /*saveProfile(newProfile, setEditMode)*/
+            /*setEditMode(false)*/
+            //need realise waite
+            onSubmitFormik(saveProfile, newProfile, setEditMode)
+            alert(JSON.stringify(values));
         },
     });
     return (
         <form onSubmit={formik.handleSubmit}>
+            {errorMessage.length > 0 ? <div style={{color: 'red', background: "orange"}}>{errorMessage}</div> : ''}
             <label htmlFor="fullName">Full Name: </label>
             <input
                 id="fullName"
                 type="text"
+                placeholder={'Full Name'}
                 {...formik.getFieldProps('fullName')}
             />
             <label htmlFor="lookingForAJob">Looking for a job: </label>
             <input
                 id="lookingForAJob"
+                name="lookingForAJob"
                 type="checkbox"
-                {...formik.getFieldProps('lookingForAJob')}
+                onChange={formik.handleChange}
+                checked={formik.values.lookingForAJob}
             />
             <label htmlFor="lookingForAJobDescription">My professional skills: </label>
             <input
+                placeholder={'Professional skills'}
                 id="lookingForAJobDescription"
                 type="text"
                 {...formik.getFieldProps('lookingForAJobDescription')}
@@ -68,84 +89,95 @@ export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, savePro
             <input
                 id="aboutMe"
                 type="text"
+                placeholder={'About me'}
                 {...formik.getFieldProps('aboutMe')}
             />
             <label htmlFor="facebook">Facebook: </label>
             <input
+                /* id="facebook"
+                 name="facebook"
+                 type="facebook"
+                 onChange={formik.handleChange}
+                 // value={formik.values.contacts.facebook}
+                 value={profile.contacts.facebook}*/
                 id="facebook"
-                name="facebook"
-                type="facebook"
-                onChange={formik.handleChange}
-                // value={formik.values.contacts.facebook}
-                value={formik.values.facebook}
+                type="text"
+                placeholder={"facebook"}
+                {...formik.getFieldProps('facebook')}
             />
             <label htmlFor="vk">VK: </label>
             <input
                 id="vk"
-                name="vk"
                 type="vk"
-                onChange={formik.handleChange}
+                placeholder={"vk"}
                 // value={formik.values.contacts.vk}
-                value={formik.values.vk}
+                {...formik.getFieldProps('vk')}
             />
             <label htmlFor="github">Github: </label>
             <input
                 id="github"
-                name="github"
                 type="github"
-                onChange={formik.handleChange}
+                placeholder={"github"}
                 // value={formik.values.contacts.github}
-                value={formik.values.github}
+                {...formik.getFieldProps('github')}
             />
             <label htmlFor="twitter">Twitter: </label>
             <input
                 id="twitter"
-                name="twitter"
                 type="twitter"
-                onChange={formik.handleChange}
+                placeholder={"twitter"}
                 // value={formik.values.contacts.twitter}
-                value={formik.values.twitter}
+                {...formik.getFieldProps('twitter')}
             />
             <label htmlFor="instagram">Instagram: </label>
             <input
                 id="instagram"
-                name="instagram"
                 type="instagram"
-                onChange={formik.handleChange}
+                placeholder={"instagram"}
                 // value={formik.values.contacts.instagram}
-                value={formik.values.instagram}
+                {...formik.getFieldProps('instagram')}
             />
             <label htmlFor="mainLink">MainLink: </label>
             <input
                 id="mainLink"
-                name="mainLink"
                 type="mainLink"
-                onChange={formik.handleChange}
+                placeholder={"mainLink"}
                 // value={formik.values.contacts.mainLink}
-                value={formik.values.mainLink}
+                {...formik.getFieldProps('mainLink')}
             />
             <label htmlFor="website">Website: </label>
             <input
                 id="website"
-                name="website"
                 type="website"
-                onChange={formik.handleChange}
+                placeholder={"website"}
                 // value={formik.values.contacts.website}
-                value={formik.values.website}
+                {...formik.getFieldProps('website')}
             />
             <label htmlFor="youtube">Youtube: </label>
             <input
                 id="youtube"
-                name="youtube"
                 type="youtube"
-                onChange={formik.handleChange}
+                placeholder={"youtube"}
                 // value={formik.values.contacts.youtube}
-                value={formik.values.youtube}
+                {...formik.getFieldProps('youtube')}
             />
-
-
             <button type="submit">Save</button>
-
         </form>
     )
 }
+
+type TestType={
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe: string
+    contacts: {
+        facebook: string
+        website: string
+        vk: string
+        twitter: string
+        instagram: string
+        youtube: string
+        github: string
+        mainLink: string
+}}

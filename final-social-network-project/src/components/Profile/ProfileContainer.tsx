@@ -24,7 +24,7 @@ type ProfileContainerType<T = undefined> = {
     id: number
     isAuth: boolean
     savePhoto: (file: File) => void
-    saveProfile:(profile:setProfileType)=>void
+    saveProfile:(profile:setProfileType, setEditMode: (editMode: boolean) => void)=>void
 }
 
 export function withRouter<T>(Component: ComponentType<T>) {

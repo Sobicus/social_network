@@ -10,7 +10,7 @@ type profileComponentType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveProfile:(profile:setProfileType)=>void
+    saveProfile:(profile:setProfileType, setEditMode: (editMode: boolean) => void)=>void
 
 }
 

@@ -29,7 +29,8 @@ let state = {
                 "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
             }
         },
-    status: 'Field for status'
+    status: 'Field for status',
+    errorMessage: ''
 }
 
 it('new post should be added', () => {

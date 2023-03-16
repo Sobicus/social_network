@@ -13,7 +13,7 @@ type profileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveProfile:(profile:setProfileType)=>void
+    saveProfile:(profile:setProfileType, setEditMode: (editMode: boolean) => void)=>void
 
 }
 export const ProfileInfo: React.FC<profileInfoType> = (props) => {
@@ -25,11 +25,6 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
         if (e.target.files && e.target.files.length) {
             props.savePhoto(e.target.files[0]);
         }
-        console.log(e.target.files!.length)
-        console.log(e.target.files?.length)
-        // console.log(e.target.files.length)
-        console.log(e.target.files)
-        console.log(e.currentTarget.value)
     }
     return (
         <div>
@@ -51,7 +46,7 @@ export const ProfileInfo: React.FC<profileInfoType> = (props) => {
                 3. Profile status
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 <br/>
-                {editMode ? <ProfileDataForm profile={props.profile} saveProfile={props.saveProfile}/> :
+                {editMode ? <ProfileDataForm profile={props.profile} saveProfile={props.saveProfile} setEditMode={setEditMode}/> :
                     <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={()=>{setEditMode(true)}}/>}
             </div>
         </div>

@@ -42,7 +42,6 @@ const SignupForm = () => {
             return errors;
         },
         onSubmit: values => {
-
             dispatch(loginTC(values.email, values.password, values.rememberMe))
         },
     });

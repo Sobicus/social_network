@@ -123,6 +123,7 @@ export type profilePageType = {
     postsData: Array<postsDataType>
     profile: ProfileType | undefined
     status: string
+    errorMessage:string
 }
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
@@ -179,11 +180,11 @@ export type ContactsKeys = 'facebook' | 'website' | 'vk' | 'twitter' | 'instagra
 export type profileContactsType = Record<ContactsKeys, string>
 */
 //2
-/*
-export type profileContactsType={
+
+/*export type profileContactsType={
     [key: string]: string
-}
-*/
+}*/
+
 
 export type profileContactsType = {
     facebook: string

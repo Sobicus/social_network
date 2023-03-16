@@ -1,7 +1,8 @@
 import {Dispatch} from "redux";
 import {postsDataType, profilePageType, ProfileType, usersPhotosStateType} from "./store";
 import {profileAPI, setProfileType} from "../api/api";
-import {AppDispatch} from "./redux-store";
+import {AppDispatch, RootStateType} from "./redux-store";
+import {errorAuthMessageAC} from "./auth-reducer";
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const DELETE_POST = 'social-network/profile/DELETE-POST';
@@ -9,6 +10,7 @@ const DELETE_POST = 'social-network/profile/DELETE-POST';
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE';
 const SET_STATUS = 'social-network/profile/SET-STATUS';
 const SAVE_PHOTO_SUCCESS = 'social-network/profile/SAVE-PHOTO-SUCCESS'
+const ERROR_MESSAGE = 'social-network/profile/ERROR-MESSAGE'
 
 let initialState: profilePageType = {
     postsData: [
@@ -39,7 +41,8 @@ let initialState: profilePageType = {
                 "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
             }
         },*/
-    status: 'Field for status'
+    status: 'Field for status',
+    errorMessage: ''
 }
 export const profileReducer = (state: profilePageType = initialState, action: actionsProfileReducerType) => {
     switch (action.type) {
@@ -72,6 +75,9 @@ export const profileReducer = (state: profilePageType = initialState, action: ac
             // return state
             // }
         }
+        case ERROR_MESSAGE:{
+            return {...state, errorMessage:action.errorMessage}
+        }
         default:
             return state
     }
@@ -103,9 +109,21 @@ export const savePhotoSuccessAC = (photos: usersPhotosStateType): savePhotoSucce
         photos
     } as const
 }
-
-export const saveProfileTC=(profile:setProfileType)=>async (dispatch:Dispatch)=>{
-    await profileAPI.saveProfile(profile)
+export const errorProfileMessageAC = (errorMessage: string): errorProfileMessageACType => {
+    return {type: ERROR_MESSAGE, errorMessage} as const
+}
+export const saveProfileTC = (profile: setProfileType, setEditMode: (editMode: boolean) => void) => async (dispatch: AppDispatch, getState: () => RootStateType) => {
+    const userID = getState().auth.userId
+    let response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        await dispatch(setUserProfileTC(userID))
+        setEditMode(false)
+    }
+    if (response.data.resultCode === 1) {
+        let errorMesыage = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+        dispatch(errorProfileMessageAC(errorMesыage))
+        setEditMode(true)
+    }
 }
 export const getStatusProfileTC = (userId: number) => async (dispatch: Dispatch) => {
     let response = await profileAPI.getStatusProfile(userId)
@@ -147,6 +165,10 @@ type savePhotoSuccessACType = {
     type: 'social-network/profile/SAVE-PHOTO-SUCCESS',
     photos: usersPhotosStateType
 }
+type errorProfileMessageACType = {
+    type: 'social-network/profile/ERROR-MESSAGE',
+    errorMessage: string
+}
 /*export type UpdateNewPostTextACType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
@@ -157,3 +179,4 @@ export type actionsProfileReducerType =
     | setStatusProfileACType
     | deletePostACType
     | savePhotoSuccessACType
+    | errorProfileMessageACType

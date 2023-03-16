@@ -41,7 +41,7 @@ export const authReducer = (state: initialAuthStateType = initialAuthState, acti
 export const setUserDataAC = (userId: number, login: string, email: string, isAuth: boolean) => {
     return {type: SET_USER_DATA, payload: {userId, login, email, isAuth}} as const
 }
-export const errorMessageAC = (errorMessage: string) => {
+export const errorAuthMessageAC = (errorMessage: string) => {
     return {type: ERROR_MESSAGE, errorMessage} as const
 }
 export const authMeTC = () => async (dispatch: AppDispatch) => {
@@ -57,11 +57,11 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
     if (response.data.resultCode === 0) {
         console.log(response)
         await dispatch(authMeTC())
-        dispatch(errorMessageAC(''))
+        dispatch(errorAuthMessageAC(''))
     }
     if (response.data.resultCode === 1) {
         let errorMesage = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-        dispatch(errorMessageAC(errorMesage))
+        dispatch(errorAuthMessageAC(errorMesage))
     }
 }
 export const logoutTC = () => async (dispatch: Dispatch) => {
@@ -71,5 +71,5 @@ export const logoutTC = () => async (dispatch: Dispatch) => {
     }
 }
 type setUserDataACType = ReturnType<typeof setUserDataAC>
-type errorMessageACType = ReturnType<typeof errorMessageAC>
+type errorMessageACType = ReturnType<typeof errorAuthMessageAC>
 type authReducerType = setUserDataACType | errorMessageACType
