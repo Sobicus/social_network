@@ -11,7 +11,6 @@ type ProfileDataFormType = {
     setEditMode: (editMode: boolean) => void
 }
 export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, saveProfile, setEditMode}) => {
-    const dispatch = useDispatch()
     const errorMessage = useAppSelector(state => state.profilePage.errorMessage)
 
     const onSubmitFormik=(saveProfile: (profile: setProfileType, setEditMode: (editMode: boolean) => void) => void,
