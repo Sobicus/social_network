@@ -45,11 +45,17 @@ export const authAPI = {
     authMe() {
         return instance.get<responseAuthType>('auth/me')
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post<responseLoginType>('auth/login', {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false, captcha: string = '') {
+        return instance.post<responseLoginType>('auth/login', {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete('auth/login')
+    }
+}
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url')
     }
 }
 type responseLoginType = {
@@ -101,6 +107,6 @@ export type setProfileType = {
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    aboutMe:string
+    aboutMe: string
     contacts: profileContactsType
 }

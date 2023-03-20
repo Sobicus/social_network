@@ -19,12 +19,15 @@ export const Login = () => {
 const SignupForm = () => {
     const dispatch = useAppDispatch()
     const errorMessage = useAppSelector(state => state.auth.errorMessage)
+    const captchaPicture = useAppSelector(state => state.auth.captchaUrl)
+
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: false,
+            captcha:''
         },
         validate(values) {
             const errors: loginErrorType = {};
@@ -42,7 +45,7 @@ const SignupForm = () => {
             return errors;
         },
         onSubmit: values => {
-            dispatch(loginTC(values.email, values.password, values.rememberMe))
+            dispatch(loginTC(values.email, values.password, values.rememberMe, values.captcha))
         },
     });
     return (
@@ -78,6 +81,17 @@ const SignupForm = () => {
                 checked={formik.values.rememberMe}
             />
             <button type="submit">Submit</button>
+            {captchaPicture && <img src={captchaPicture}/>}
+            {captchaPicture && <input
+                id="captcha"
+                name="captcha"
+                type="captcha"
+                placeholder="captcha"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.captcha}
+
+            />}
         </form>
     );
 };
